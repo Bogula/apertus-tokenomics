@@ -1,0 +1,43 @@
+{
+  "_comment": "Workload shapes. Each is a realistic enterprise traffic pattern, not a synthetic vanity number. The isl/osl ratio is what decides whether prefill or decode dominates - and therefore whether Dynamo disaggregation can help you at all.",
+  "workloads": [
+    {
+      "name": "chat",
+      "desc": "Interactive assistant. Decode-bound. TTFT is the SLO that matters.",
+      "isl": 512,
+      "osl": 256,
+      "slo": {"ttft_ms_p95": 500, "itl_ms_p95": 50}
+    },
+    {
+      "name": "rag",
+      "desc": "Retrieval-augmented QA. Prefill-heavy - the classic disaggregation win.",
+      "isl": 4096,
+      "osl": 256,
+      "slo": {"ttft_ms_p95": 2000, "itl_ms_p95": 50}
+    },
+    {
+      "name": "summarize",
+      "desc": "Long doc in, short answer out. Most prefill-dominant case.",
+      "isl": 8000,
+      "osl": 200,
+      "slo": {"ttft_ms_p95": 4000, "itl_ms_p95": 80}
+    },
+    {
+      "name": "agent",
+      "desc": "Tool-calling loop: medium prompt, long structured output.",
+      "isl": 1024,
+      "osl": 1024,
+      "slo": {"ttft_ms_p95": 1000, "itl_ms_p95": 40}
+    },
+    {
+      "name": "batch",
+      "desc": "Offline classification. No latency SLO - pure throughput/cost.",
+      "isl": 1024,
+      "osl": 128,
+      "slo": null
+    }
+  ],
+  "concurrency_ladder": [1, 2, 4, 8, 16, 32, 64, 128, 256],
+  "request_count_per_concurrency": 200,
+  "warmup_requests": 20
+}

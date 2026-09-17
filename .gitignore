@@ -1,0 +1,6 @@
+artifacts/
+artifacts-selftest/
+.env
+dynamo/.src/
+__pycache__/
+*.pyc
