@@ -24,7 +24,7 @@
     {
       "name": "summarize",
       "desc": "Long doc in, short answer out. Most prefill-dominant case.",
-      "isl": 8000,
+      "isl": 7500,
       "osl": 200,
       "slo": {
         "ttft_ms_p95": 4000,
