@@ -4,7 +4,7 @@
 #
 # Usage:
 #   nim/11_serve.sh                                  # 8B, TP=1, defaults
-#   MODEL=$APERTUS_70B TP_SIZE=4 nim/11_serve.sh
+#   MODEL=$APERTUS10_70B TP_SIZE=4 nim/11_serve.sh
 #   TP_SIZE=2 MAX_MODEL_LEN=32768 RUN_TAG=long-ctx nim/11_serve.sh
 #
 # Env knobs (all optional, all recorded into the run tag):
@@ -15,7 +15,7 @@ cd "$(dirname "$0")/.."
 # shellcheck source=/dev/null
 source .env
 
-MODEL="${MODEL:-$APERTUS_8B}"
+MODEL="${MODEL:-$APERTUS10_8B}"
 TP_SIZE="${TP_SIZE:-1}"
 MAX_MODEL_LEN="${MAX_MODEL_LEN:-8192}"
 GPU_MEM_UTIL="${GPU_MEM_UTIL:-0.90}"

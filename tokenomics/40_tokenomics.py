@@ -93,6 +93,13 @@ def main() -> int:
                          "or prefill+decode GPUs for a Dynamo topology)")
     ap.add_argument("--utilization", type=float, default=None,
                     help="0-1; defaults to prices.json assumptions.utilization_pct")
+    ap.add_argument("--thinking-multiplier", type=float, default=1.0,
+                    help="billed tokens per visible token with thinking mode on "
+                         "(from bench/24_thinking_tax.py --compare). Adds a "
+                         "$/1M VISIBLE tokens column - the cost the user's value "
+                         "is actually measured against.")
+    ap.add_argument("--audio-minutes", action="store_true",
+                    help="also report cost per minute of audio input (40 tok/s)")
     ap.add_argument("--ignore-slo", action="store_true",
                     help="cost the peak-throughput point even if it misses the "
                          "latency SLO (report both if you use this)")
@@ -181,9 +188,15 @@ def main() -> int:
     md.append(f"- Unverified prices are flagged; see `tokenomics/prices.json`.\n")
 
     md.append("\n## Self-hosted cost per million tokens\n")
+    think_col = a.thinking_multiplier and a.thinking_multiplier != 1.0
+    if think_col:
+        md.append(f"Thinking multiplier **{a.thinking_multiplier:.2f}x** applied: "
+                  "reasoning tokens are billed but never shown to the user, so "
+                  "*$/1M visible* is the cost the delivered value is measured against.\n")
     md.append("| system | workload | conc | out tok/s | TTFT p95 (ms) | "
-              "$/1M out (100% util) | $/1M out (@util) | $/1M blended (@util) |")
-    md.append("|---|---|---:|---:|---:|---:|---:|---:|")
+              "$/1M out (100% util) | $/1M out (@util) | $/1M blended (@util) |"
+              + (" $/1M visible (@util) |" if think_col else ""))
+    md.append("|---|---|---:|---:|---:|---:|---:|---:|" + ("---:|" if think_col else ""))
 
     self_costs: dict = {}
     for (system, wl), r in sorted(best.items()):
@@ -201,8 +214,11 @@ def main() -> int:
         c_blend = cost_per_mtok(rent_h, total_tp, util)
         self_costs[(system, wl)] = {"out": c_real, "blended": c_blend,
                                     "tp": tp, "total_tp": total_tp}
-        md.append(f"| {system} | {wl} | {conc} | {tp:,.0f} | {ttft_s} | "
+        row_md = (f"| {system} | {wl} | {conc} | {tp:,.0f} | {ttft_s} | "
                   f"${c_ideal:,.2f} | ${c_real:,.2f} | ${c_blend:,.2f} |")
+        if think_col:
+            row_md += f" ${c_real * a.thinking_multiplier:,.2f} |"
+        md.append(row_md)
 
     # ---- comparison vs cloud ----------------------------------------------
     md.append("\n## Versus cloud token APIs\n")
@@ -242,6 +258,23 @@ def main() -> int:
         cells = " | ".join(f"${cost_per_mtok(rent_h, d['tp'], u):,.2f}"
                            for u in (0.20, 0.45, 0.80, 1.00))
         md.append(f"| {system} | {wl} | {cells} |")
+
+    if a.audio_minutes:
+        mm = prices.get("multimodal", {})
+        tps = mm.get("audio_tokens_per_second", 40)
+        md.append("\n## Cost per minute of audio input\n")
+        md.append(f"Apertus 1.5 takes audio at **{tps} tokens/second**, so one "
+                  f"minute of speech = **{tps * 60:,} input tokens**.\n")
+        md.append("| system | $/1M blended (@util) | $/minute of audio |")
+        md.append("|---|---:|---:|")
+        for (system, wl), d in sorted(self_costs.items()):
+            if wl != "summarize":   # long-input shape is the closest text analogue
+                continue
+            md.append(f"| {system} | ${d['blended']:,.2f} | "
+                      f"${d['blended'] * tps * 60 / 1e6:,.5f} |")
+        ref = mm.get("speech_api_usd_per_audio_minute")
+        md.append(f"\nComparator speech API: "
+                  + (f"${ref}/min" if ref else "_not filled in - see prices.json_") + "\n")
 
     md.append("\n## What to say about this\n")
     md.append("1. State the operating point, not the peak. Every cost number above "

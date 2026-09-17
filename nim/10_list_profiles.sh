@@ -11,7 +11,7 @@ cd "$(dirname "$0")/.."
 # shellcheck source=/dev/null
 source .env
 
-MODEL="${1:-$APERTUS_8B}"
+MODEL="${1:-$APERTUS10_8B}"
 OUT="$ARTIFACTS_DIR/profiles"
 mkdir -p "$OUT"
 SAFE=$(echo "$MODEL" | tr '/' '_')

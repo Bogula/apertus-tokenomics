@@ -43,11 +43,19 @@
       "input_usd_per_mtok": 0.10, "output_usd_per_mtok": 0.20,
       "verified": false, "source": "TODO", "notes": "serverless, per-token billing"
     },
-    "apertus-hosted-ch": {
+    "swisscom-apertus-v1.5-70b": {
       "input_usd_per_mtok": null, "output_usd_per_mtok": null,
-      "verified": false, "source": "TODO",
-      "notes": "Swiss/EU-hosted Apertus endpoint if one is available - the most honest comparator for this challenge"
+      "verified": false, "source": "https://zh.ai-weeks.ch/tools/swisscom-hacker-guide",
+      "notes": "THE comparator: same model, same weights, hosted. Free for hackathon participants, so there is no published per-token price - find Swisscom's commercial rate, or state plainly that you are comparing against a free tier and use the measured throughput at their 5 req/s cap as the basis. Limits: 5 req/s, 10M input / 2.5M output budget, 60-minute bearer."
     }
+  },
+
+  "multimodal": {
+    "_note": "Apertus 1.5 takes image and audio input. Audio is 40 tokens per second, so one minute of speech = 2400 input tokens. Use this to quote cost per minute of audio and compare against dedicated speech APIs - a cost axis a text-only study cannot reach.",
+    "audio_tokens_per_second": 40,
+    "speech_api_usd_per_audio_minute": null,
+    "speech_api_verified": false,
+    "speech_api_source": "TODO"
   },
 
   "assumptions": {

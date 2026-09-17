@@ -28,16 +28,24 @@ if [ "$WL" = "all" ]; then
   exit 0
 fi
 
-read -r ISL OSL TTFT_SLO ITL_SLO <<EOF
+read -r ISL OSL TTFT_SLO ITL_SLO FIXED_OUT NEED_LEN <<EOF
 $(python3 - "$SCEN" "$WL" <<'PY'
 import json,sys
 s=json.load(open(sys.argv[1]))
 w=next(x for x in s["workloads"] if x["name"]==sys.argv[2])
 slo=w.get("slo") or {}
-print(w["isl"], w["osl"], slo.get("ttft_ms_p95",0), slo.get("itl_ms_p95",0))
+print(w["isl"], w["osl"], slo.get("ttft_ms_p95",0), slo.get("itl_ms_p95",0),
+      int(w.get("fixed_output", True)), w.get("requires_max_model_len", 0))
 PY
 )
 EOF
+
+# Guard: a long-context shape against a short-context server measures nothing.
+if [ "${NEED_LEN:-0}" -gt 0 ] && [ "${MAX_MODEL_LEN:-8192}" -lt "$NEED_LEN" ]; then
+  echo "SKIP '$WL': needs --max-model-len >= $NEED_LEN, server is at ${MAX_MODEL_LEN:-8192}."
+  echo "  restart with: MAX_MODEL_LEN=$NEED_LEN bash serve/15_serve_v15.sh"
+  exit 0
+fi
 
 LADDER=$(python3 -c "import json;print(' '.join(map(str,json.load(open('$SCEN'))['concurrency_ladder'])))")
 NREQ=$(python3 -c "import json;print(json.load(open('$SCEN'))['request_count_per_concurrency'])")
@@ -45,6 +53,13 @@ NREQ=$(python3 -c "import json;print(json.load(open('$SCEN'))['request_count_per
 ROOT="$ARTIFACTS_DIR/bench/$SYSTEM/$WL"
 mkdir -p "$ROOT"
 echo "== sweep: system=$SYSTEM workload=$WL isl=$ISL osl=$OSL =="
+
+# Fixed-length output makes configs comparable. Thinking mode must NOT be pinned:
+# the model decides how long it reasons, and forcing ignore_eos would measure a
+# truncated trace instead of the real, billable cost.
+OUT_ARGS=(--output-tokens-mean "$OSL" --output-tokens-stddev 0
+          --extra-inputs "max_tokens:$OSL")
+[ "$FIXED_OUT" = 1 ] && OUT_ARGS+=(--extra-inputs ignore_eos:true)
 
 for C in $LADDER; do
   echo "-- concurrency $C"
@@ -57,10 +72,7 @@ for C in $LADDER; do
     --streaming \
     --synthetic-input-tokens-mean "$ISL" \
     --synthetic-input-tokens-stddev 0 \
-    --output-tokens-mean "$OSL" \
-    --output-tokens-stddev 0 \
-    --extra-inputs ignore_eos:true \
-    --extra-inputs "max_tokens:$OSL" \
+    "${OUT_ARGS[@]}" \
     --concurrency "$C" \
     --request-count "$((NREQ > C*4 ? NREQ : C*4))" \
     --warmup-request-count 20 \

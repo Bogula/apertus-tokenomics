@@ -58,7 +58,7 @@ fi
 hdr "Network egress (you will pull ~20-160 GB)"
 START=$(date +%s)
 curl -sL -o /dev/null -w '  huggingface.co: %{speed_download} B/s, http %{http_code}\n' \
-  --max-time 15 "https://huggingface.co/swiss-ai/Apertus-8B-Instruct-2509/resolve/main/config.json" \
+  --max-time 15 "https://huggingface.co/swiss-ai/Apertus-v1.5-8B/resolve/main/config.json" \
   || warn "cannot reach huggingface.co - check proxy"
 curl -sL -o /dev/null -w '  nvcr.io:        http %{http_code}\n' --max-time 15 "https://nvcr.io/v2/" \
   || warn "cannot reach nvcr.io"

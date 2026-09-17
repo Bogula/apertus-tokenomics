@@ -1,4 +1,4 @@
-# Findings — Optimized Apertus
+# Findings — Optimized Apertus 1.5
 
 > Fill this in as you go. A half-written findings doc at hour 20 beats a blank
 > one plus perfect logs.
@@ -17,83 +17,118 @@
 | Egress throughput | |
 | GPU hourly list price (with source URL) | |
 
-## Finding #1 — which backend actually serves Apertus
+## Finding #1 — the frontier lag (Phase 1, leg A)
 
-Output of `nim/10_list_profiles.sh`:
+Evidence in `artifacts/nim-v15-attempt/`.
 
-```
-(paste)
-```
+| model | NIM profile offered | backend | loads? |
+|---|---|---|---|
+| Llama-3.1-8B-Instruct (reference) | | trtllm? | |
+| Apertus-8B-Instruct-2509 (v1.0) | | | |
+| **Apertus-v1.5-8B** | | | |
 
-- Backend selected: `trtllm` / `vllm` / `sglang`
-- TensorRT-LLM profile available? yes / no
-- If no — why: Apertus uses the xIELU activation; `ApertusForCausalLM` is not in
-  the TensorRT-LLM supported-models list.
-- **Implication for the study:**
+- NIM image tag and build date used:
+- Exact error for v1.5:
+- Upstream vLLM version bundled in NIM vs version needed for `apertus1p5`:
+- **Gap, stated as a number** (weeks between model release and vendor support,
+  or "unsupported as of \<date\>"):
+- **Implication for anyone running open models in production:**
 
-## Baseline (Phase 2)
+## Serving configuration (Phase 2, leg B)
+
+- Image: `ghcr.io/swiss-ai/vllm_apertus_1.5_release:` \_\_\_\_
+- Flags used:
+- Smoke test results: text ☐ multilingual ☐ tool calling ☐ thinking ☐ image ☐
+
+## Baseline (Phase 3)
 
 | system | workload | conc at SLO knee | out tok/s | TTFT p95 | ITL p95 |
 |---|---|---:|---:|---:|---:|
-| nim-8b-tp1 | chat | | | | |
-| nim-8b-tp1 | rag | | | | |
-| nim-8b-tp1 | summarize | | | | |
-| nim-8b-tp1 | agent | | | | |
-| nim-8b-tp1 | batch | | | | |
+| v15-8b-len8k | chat | | | | |
+| v15-8b-len8k | rag | | | | |
+| v15-8b-len8k | summarize | | | | |
+| v15-8b-len8k | agent | | | | |
+| v15-8b-len8k | batch | | | | |
 
-SLOs used: TTFT p95 / ITL p95 per `bench/scenarios.json`.
+## Finding #2 — the price of 262k context (Phase 5)
 
-## Optimization deltas (Phase 4)
+| `--max-model-len` | max concurrent seqs | out tok/s @ knee | $/1M out |
+|---:|---:|---:|---:|
+| 8,192 | | | |
+| 32,768 | | | |
+| 131,072 | | | |
+| 262,144 | | | |
 
-One row per single change. Always relative to the baseline above.
+Cost multiple from 8k → 262k: \_\_\_×
+
+Takeaway sentence for the slide:
+
+## Finding #3 — the thinking tax (Phase 7)
+
+From `bench/24_thinking_tax.py --compare`:
+
+| | thinking off | thinking on |
+|---|---:|---:|
+| completion tokens (8 prompts) | | |
+| est. visible tokens | | |
+| accuracy | | |
+| mean latency (s) | | |
+
+- Billed-token multiplier: \_\_\_×
+- Multiplier **per visible token**: \_\_\_×
+- Accuracy delta: \_\_\_ points
+- **Worth it for which workloads, and not for which:**
+
+## Optimization deltas (Phase 5)
+
+One row per single change, always relative to the baseline above.
 
 | change | workload | out tok/s | Δ vs baseline | $/1M out | Δ cost | quality gate |
 |---|---|---:|---:|---:|---:|---|
-| FP8 weights + KV | | | | | | pass/fail |
-| max-model-len 64k → 8k | | | | | | |
+| max-model-len 262k → 8k | | | | | | pass/fail |
+| gpu-mem-util 0.6 → 0.8 | | | | | | |
+| FP8 (LM only, encoders fp32) | | | | | | multimodal ☐ |
 | TP=2 vs 2 replicas | | | | | | |
 | prefix caching on | | | | | | |
-| SGLang instead of vLLM | | | | | | |
-| NIM vs vanilla vLLM | | | | | | |
+| max-num-seqs sweep | | | | | | |
 
 **Best config found:**
 
-## Scaling: 8B vs 70B (Phase 5)
+## Finding #4 — build vs buy, same weights (Phase 6, leg C)
+
+Swisscom hosted Apertus-v1.5-70B vs self-hosted. Caveats to state: network RTT
+from LaunchPad, their batching is shared across teams, free tier.
+
+| | self-hosted 70B | Swisscom hosted |
+|---|---:|---:|
+| out tok/s @ SLO | | |
+| TTFT p95 | | |
+| $/1M blended | | (free tier / commercial rate: ___) |
+
+- Break-even monthly volume: \_\_\_ M tokens
+- Utilization assumption behind that: \_\_\_%
+- Quota consumed: \_\_\_ input / \_\_\_ output (of 10M / 2.5M)
+
+## Scaling: 8B vs 70B (Phase 7)
 
 | model | GPUs | precision | out tok/s | $/1M out | $/1M blended |
 |---|---:|---|---:|---:|---:|
-| Apertus-8B | | | | | |
-| Apertus-70B | | | | | |
+| Apertus-v1.5-8B | | | | | |
+| Apertus-v1.5-70B | | | | | |
 
-Cost ratio 70B/8B: ______ (parameter ratio is 8.75×)
+Cost ratio 70B/8B: \_\_\_ (parameter ratio ≈ 8×)
 
-Why the ratio differs from 8.75×:
+Why the ratio differs from 8×:
 
-## Tokenomics (Phase 3 + 7)
+## Multimodal cost axis (optional but differentiating)
 
-Assumptions stated out loud:
+- Audio: 40 tokens/s → 2,400 tokens per minute of speech
+- Measured $/minute of audio: \_\_\_
+- Versus a dedicated speech API at \_\_\_/min:
 
-- GPU hourly rate: ______ (source: ______)
-- Utilization: ______%
-- Cost basis: rental / amortized-owned
+## Dynamo (Phase 8, if reached)
 
-| comparator | $/1M blended | vs self-host | break-even (M tok/month) |
-|---|---:|---:|---:|
-| self-host (best config) | | — | — |
-| frontier API | | | |
-| open-weights vendor | | | |
-| hosted Apertus | | | |
-
-Non-cost factors that change the decision:
-
-- Data residency:
-- Model openness / auditability (Apertus is Apache-2.0, open data + recipes):
-- Rate limits and burst headroom:
-- Deprecation risk:
-
-## Dynamo (Phase 6, if reached)
-
-Total GPUs held constant at ______ across all three rows.
+Total GPUs held constant at \_\_\_ across all rows.
 
 | topology | workload | out tok/s | TTFT p95 | $/1M blended |
 |---|---|---:|---:|---:|
@@ -102,9 +137,19 @@ Total GPUs held constant at ______ across all three rows.
 | disaggregated 1P+1D | rag | | | |
 | disaggregated 1P+2D | rag | | | |
 
-Optimal prefill:decode ratio vs ISL/OSL:
+- Did `33_build_apertus_image.sh` succeed? If not, which layer blocked it:
+- Optimal prefill:decode ratio vs ISL/OSL:
+- Where disaggregation did **not** help, and why:
 
-Where disaggregation did **not** help, and why:
+## Beyond cost
+
+| factor | self-hosted Apertus | hosted Apertus | closed frontier API |
+|---|---|---|---|
+| Data residency | | | |
+| Weights + data openness | Apache 2.0, open data | same model | closed |
+| EU AI Act documentation | published | | |
+| Rate limits | your hardware | 5 req/s | vendor tiers |
+| Deprecation risk | none | | vendor-controlled |
 
 ## The assumption that would flip our conclusion
 
@@ -114,8 +159,11 @@ Where disaggregation did **not** help, and why:
 git clone <this repo> && cd optimized-apertus
 cp env/.env.example .env && $EDITOR .env
 bash env/00_env_check.sh && bash env/01_login.sh
-bash nim/10_list_profiles.sh && bash nim/11_serve.sh && bash nim/12_smoke.sh
-bash bench/20_install.sh && SYSTEM=nim-8b-tp1 bash bench/21_sweep.sh all
+bash nim/14_nim_v15_attempt.sh                  # leg A evidence
+bash serve/15_serve_v15.sh && bash serve/16_smoke_v15.sh
+bash bench/20_install.sh && SYSTEM=v15-8b-len8k bash bench/21_sweep.sh all
+bash bench/23_swisscom.sh rag                   # leg C
 python3 bench/22_collect.py --root artifacts/bench -o artifacts/results.csv
-python3 tokenomics/40_tokenomics.py --results artifacts/results.csv --gpu <GPU>
+python3 tokenomics/40_tokenomics.py --results artifacts/results.csv \
+        --gpu <GPU> --thinking-multiplier <X> --audio-minutes
 ```

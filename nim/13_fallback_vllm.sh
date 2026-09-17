@@ -13,7 +13,7 @@ cd "$(dirname "$0")/.."
 # shellcheck source=/dev/null
 source .env
 
-MODEL="${MODEL:-$APERTUS_8B}"
+MODEL="${MODEL:-$APERTUS10_8B}"
 TP_SIZE="${TP_SIZE:-1}"
 MAX_MODEL_LEN="${MAX_MODEL_LEN:-8192}"
 PORT="${NIM_PORT:-8000}"

@@ -11,7 +11,7 @@ cd "$(dirname "$0")/.."
 # shellcheck source=/dev/null
 source .env
 
-MODEL="${MODEL:-$APERTUS_8B}"
+MODEL="${MODEL:-$APERTUS15_8B}"
 TP_SIZE="${TP_SIZE:-1}"
 REPLICAS="${REPLICAS:-1}"
 ROUTER="${ROUTER:-round-robin}"   # round-robin | kv

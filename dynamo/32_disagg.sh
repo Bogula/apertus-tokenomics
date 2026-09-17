@@ -18,7 +18,7 @@ cd "$(dirname "$0")/.."
 # shellcheck source=/dev/null
 source .env
 
-MODEL="${MODEL:-$APERTUS_8B}"
+MODEL="${MODEL:-$APERTUS15_8B}"
 TP_SIZE="${TP_SIZE:-1}"
 PREFILL="${PREFILL:-1}"
 DECODE="${DECODE:-1}"
