@@ -6,28 +6,40 @@
       "desc": "Interactive assistant. Decode-bound. TTFT is the SLO that matters.",
       "isl": 512,
       "osl": 256,
-      "slo": {"ttft_ms_p95": 500, "itl_ms_p95": 50}
+      "slo": {
+        "ttft_ms_p95": 500,
+        "itl_ms_p95": 50
+      }
     },
     {
       "name": "rag",
       "desc": "Retrieval-augmented QA. Prefill-heavy - the classic disaggregation win.",
       "isl": 4096,
       "osl": 256,
-      "slo": {"ttft_ms_p95": 2000, "itl_ms_p95": 50}
+      "slo": {
+        "ttft_ms_p95": 2000,
+        "itl_ms_p95": 50
+      }
     },
     {
       "name": "summarize",
       "desc": "Long doc in, short answer out. Most prefill-dominant case.",
       "isl": 8000,
       "osl": 200,
-      "slo": {"ttft_ms_p95": 4000, "itl_ms_p95": 80}
+      "slo": {
+        "ttft_ms_p95": 4000,
+        "itl_ms_p95": 80
+      }
     },
     {
       "name": "agent",
       "desc": "Tool-calling loop: medium prompt, long structured output. 1.5 improved tool use - exercise it.",
       "isl": 1024,
       "osl": 1024,
-      "slo": {"ttft_ms_p95": 1000, "itl_ms_p95": 40}
+      "slo": {
+        "ttft_ms_p95": 1000,
+        "itl_ms_p95": 40
+      }
     },
     {
       "name": "batch",
@@ -41,7 +53,10 @@
       "desc": "Apertus 1.5 advertises 262k context. This shape needs --max-model-len >= 131072 and will collapse concurrency. Run it to price the advertised capability.",
       "isl": 100000,
       "osl": 512,
-      "slo": {"ttft_ms_p95": 30000, "itl_ms_p95": 120},
+      "slo": {
+        "ttft_ms_p95": 30000,
+        "itl_ms_p95": 120
+      },
       "requires_max_model_len": 131072
     },
     {
@@ -49,13 +64,22 @@
       "desc": "Same prompt shape as chat, served with thinking mode ON. osl is a BUDGET, not a target - the model decides how much it reasons. Compare billed vs visible tokens; see bench/24_thinking_tax.py.",
       "isl": 512,
       "osl": 2048,
-      "slo": {"ttft_ms_p95": 500, "itl_ms_p95": 60},
+      "slo": {
+        "ttft_ms_p95": 500,
+        "itl_ms_p95": 60
+      },
       "thinking": true,
       "fixed_output": false
     }
   ],
-  "concurrency_ladder": [1, 2, 4, 8, 16, 32, 64, 128, 256],
-  "request_count_per_concurrency": 200,
+  "concurrency_ladder": [
+    1,
+    4,
+    16,
+    64,
+    128
+  ],
+  "request_count_per_concurrency": 100,
   "warmup_requests": 20,
   "_notes": {
     "multimodal": "Audio contributes 40 tokens/second, so 1 minute of speech = 2400 input tokens. An audio workload is a differentiating result - price cost per minute of audio and compare against dedicated speech APIs.",

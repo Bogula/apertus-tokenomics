@@ -67,6 +67,7 @@ for C in $LADDER; do
   mkdir -p "$OUTDIR"
   aiperf profile \
     --model apertus \
+    --tokenizer "${TOKENIZER:-swiss-ai/Apertus-v1.5-8B}" \
     --url "$URL" \
     --endpoint-type chat \
     --streaming \

@@ -60,7 +60,7 @@ echo "== $NAME =="
 echo "   image=$APERTUS15_VLLM_IMAGE"
 echo "   model=$MODEL tp=$TP_SIZE len=$MAX_MODEL_LEN util=$GPU_MEM_UTIL thinking=$ENABLE_THINKING"
 
-docker run -d --name "$NAME" --gpus all \
+docker run -d --name "$NAME" --gpus all -e CUDA_VISIBLE_DEVICES="${GPUS:-0,1}" \
   --shm-size=32GB --network=host --ipc=host \
   -v "$HF_HOME:/root/.cache/huggingface" \
   -e HF_TOKEN="$HF_TOKEN" \

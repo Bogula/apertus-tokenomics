@@ -6,16 +6,39 @@
     "Units: gpu_hourly_usd is per single GPU per hour. Cloud prices are USD",
     "per 1,000,000 tokens."
   ],
-
   "gpu_rental": {
     "_note": "What one GPU-hour of the LaunchPad-class hardware costs you if you had to rent it. Use on-demand list price for the headline number and a reserved/committed rate for the sensitivity analysis.",
-    "H100-80GB-SXM": {"gpu_hourly_usd": 3.50, "verified": false, "source": "TODO"},
-    "H200-141GB":    {"gpu_hourly_usd": 4.50, "verified": false, "source": "TODO"},
-    "L40S-48GB":     {"gpu_hourly_usd": 1.20, "verified": false, "source": "TODO"},
-    "A100-80GB":     {"gpu_hourly_usd": 2.00, "verified": false, "source": "TODO"},
-    "GH200":         {"gpu_hourly_usd": 4.00, "verified": false, "source": "TODO"}
+    "H100-80GB-SXM": {
+      "gpu_hourly_usd": 3.5,
+      "verified": false,
+      "source": "TODO"
+    },
+    "H200-141GB": {
+      "gpu_hourly_usd": 4.5,
+      "verified": false,
+      "source": "TODO"
+    },
+    "L40S-48GB": {
+      "gpu_hourly_usd": 1.2,
+      "verified": false,
+      "source": "TODO"
+    },
+    "A100-80GB": {
+      "gpu_hourly_usd": 2.0,
+      "verified": false,
+      "source": "TODO"
+    },
+    "GH200": {
+      "gpu_hourly_usd": 4.0,
+      "verified": false,
+      "source": "TODO"
+    },
+    "H100-NVL-94GB": {
+      "gpu_hourly_usd": 3.12,
+      "verified": true,
+      "source": "https://gpus.io/en/gpus/h100nvl - median of listed providers, checked 2026-09-17; range 2.91-3.19"
+    }
   },
-
   "owned_hardware": {
     "_note": "Alternative to renting: amortize a bought box. This is the number a Swiss enterprise with a data-residency requirement actually cares about, and it usually wins at high volume.",
     "enabled": true,
@@ -28,28 +51,37 @@
     "ops_fte_usd_per_year": 0,
     "gpus_in_cluster": 8
   },
-
   "cloud_apis": {
     "_note": "Comparison set. Mix (a) a frontier API, (b) an open-weights model served by a token vendor, and (c) Apertus served by someone else if such an endpoint exists. Fill in real numbers on the day.",
     "frontier-api-tier1": {
-      "input_usd_per_mtok": 3.00, "output_usd_per_mtok": 15.00,
-      "verified": false, "source": "TODO", "notes": "closed weights, no data residency guarantee"
+      "input_usd_per_mtok": 3.0,
+      "output_usd_per_mtok": 15.0,
+      "verified": false,
+      "source": "TODO",
+      "notes": "closed weights, no data residency guarantee"
     },
     "open-weights-vendor-70b": {
-      "input_usd_per_mtok": 0.60, "output_usd_per_mtok": 0.80,
-      "verified": false, "source": "TODO", "notes": "serverless, per-token billing"
+      "input_usd_per_mtok": 0.6,
+      "output_usd_per_mtok": 0.8,
+      "verified": false,
+      "source": "TODO",
+      "notes": "serverless, per-token billing"
     },
     "open-weights-vendor-8b": {
-      "input_usd_per_mtok": 0.10, "output_usd_per_mtok": 0.20,
-      "verified": false, "source": "TODO", "notes": "serverless, per-token billing"
+      "input_usd_per_mtok": 0.1,
+      "output_usd_per_mtok": 0.2,
+      "verified": false,
+      "source": "TODO",
+      "notes": "serverless, per-token billing"
     },
     "swisscom-apertus-v1.5-70b": {
-      "input_usd_per_mtok": null, "output_usd_per_mtok": null,
-      "verified": false, "source": "https://zh.ai-weeks.ch/tools/swisscom-hacker-guide",
+      "input_usd_per_mtok": null,
+      "output_usd_per_mtok": null,
+      "verified": false,
+      "source": "https://zh.ai-weeks.ch/tools/swisscom-hacker-guide",
       "notes": "THE comparator: same model, same weights, hosted. Free for hackathon participants, so there is no published per-token price - find Swisscom's commercial rate, or state plainly that you are comparing against a free tier and use the measured throughput at their 5 req/s cap as the basis. Limits: 5 req/s, 10M input / 2.5M output budget, 60-minute bearer."
     }
   },
-
   "multimodal": {
     "_note": "Apertus 1.5 takes image and audio input. Audio is 40 tokens per second, so one minute of speech = 2400 input tokens. Use this to quote cost per minute of audio and compare against dedicated speech APIs - a cost axis a text-only study cannot reach.",
     "audio_tokens_per_second": 40,
@@ -57,7 +89,6 @@
     "speech_api_verified": false,
     "speech_api_source": "TODO"
   },
-
   "assumptions": {
     "utilization_pct": 45,
     "_utilization_note": "Fraction of wall-clock the self-hosted GPU is actually serving at the benchmarked operating point. Real enterprise traffic is diurnal; 100% is a lie and judges know it. Run the sensitivity sweep at 20/45/80.",
