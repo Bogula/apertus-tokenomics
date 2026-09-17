@@ -167,3 +167,14 @@ python3 bench/22_collect.py --root artifacts/bench -o artifacts/results.csv
 python3 tokenomics/40_tokenomics.py --results artifacts/results.csv \
         --gpu <GPU> --thinking-multiplier <X> --audio-minutes
 ```
+
+## Run log — 2026-09-17T16:20:36+00:00
+```
+model: swiss-ai/Apertus-v1.5-8B
+served_as: apertus
+max_model_len: 8192
+["vllm","serve","swiss-ai/Apertus-v1.5-8B","--served-model-name","apertus","--chat-template-content-format","string","--tensor-parallel-size","1","--gpu-memory-utilization","0.85","--max-model-len","8192","--enable-auto-tool-choice","--tool-call-parser","apertus","--host","0.0.0.0","--port","8000"]
+index, name, memory.total [MiB]
+0, NVIDIA H100 NVL, 95830 MiB
+1, NVIDIA H100 NVL, 95830 MiB
+```
