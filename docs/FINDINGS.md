@@ -178,3 +178,10 @@ index, name, memory.total [MiB]
 0, NVIDIA H100 NVL, 95830 MiB
 1, NVIDIA H100 NVL, 95830 MiB
 ```
+
+## Running Apertus 1.5 8B on Spark DGX
+The Spark reports 85× KV capacity but misses a 50 ms ITL interactive budget at concurrency 
+1. It is not a serving box at any concurrency — it's a batch box. 
+Price it on batch and summarize, where latency has no SLO, 
+and its cost per token competes with the datacenter GPU. 
+Price it on chat and it never qualifies at any price.
