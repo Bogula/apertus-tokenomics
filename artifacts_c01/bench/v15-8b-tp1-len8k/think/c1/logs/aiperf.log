@@ -1,0 +1,337 @@
+2026-09-17 16:28:02.708 - aiperf.cli_runner._single_run - INFO - Starting AIPerf System
+2026-09-17 16:28:02.716 - aiperf.config.resolution.resolvers - INFO - [OK] Tokenizer apertus detected
+2026-09-17 16:28:02.716 - aiperf.config.resolution.resolvers - INFO - 1 tokenizer validated | 0.0s
+2026-09-17 16:28:02.717 - aiperf.config.resolution.resolvers - INFO - HF cache hit (skipping prefetch): ['apertus']
+2026-09-17 16:28:03.021 - aiperf - WARNING - Using --osl without ignore_eos or min_tokens in --extra-inputs. Output sequence length cannot be guaranteed unless the server honors these parameters. Consider: --extra-inputs ignore_eos:true (generate until max_tokens) or --extra-inputs min_tokens:<value> (set minimum output length).
+2026-09-17 16:28:03.184 - server_metrics_manager - INFO - Server Metrics: Discovered 1 endpoints: ['http://localhost:8000/metrics']
+2026-09-17 16:28:03.222 - GPUTelemetryJSONLWriter_c8487874 - INFO - GPU telemetry export enabled: /home/nvidia/apertus-benchmark/apertus-tokenomics/artifacts/bench/v15-8b-tp1-len8k/think/c1/gpu_telemetry_export.jsonl
+2026-09-17 16:28:03.229 - OTelMetricsResultsProcessor_4145e25f - INFO - Telemetry streaming is disabled (set --otel-url and/or --mlflow-tracking-uri to enable)
+2026-09-17 16:28:03.230 - RecordExportJSONLWriter_beee2233 - INFO - Record metrics export enabled: /home/nvidia/apertus-benchmark/apertus-tokenomics/artifacts/bench/v15-8b-tp1-len8k/think/c1/profile_export.jsonl
+2026-09-17 16:28:03.260 - system_controller - INFO - Registered Worker Manager (id: 'worker_manager')
+2026-09-17 16:28:03.290 - system_controller - INFO - Registered Gpu Telemetry Manager (id: 'gpu_telemetry_manager')
+2026-09-17 16:28:03.307 - system_controller - INFO - Registered Dataset Manager (id: 'dataset_manager')
+2026-09-17 16:28:03.309 - system_controller - INFO - Registered Server Metrics Manager (id: 'server_metrics_manager')
+2026-09-17 16:28:03.350 - system_controller - INFO - Registered Records Manager (id: 'records_manager')
+2026-09-17 16:28:03.406 - system_controller - INFO - Registered Record Processor (id: 'record_processor_36559d9b')
+2026-09-17 16:28:03.454 - system_controller - INFO - Registered Timing Manager (id: 'timing_manager')
+2026-09-17 16:28:03.569 - system_controller - INFO - Registered Worker (id: 'worker_31bed120')
+2026-09-17 16:28:03.653 - system_controller - INFO - AIPerf System is CONFIGURING
+2026-09-17 16:28:03.653 - system_controller - INFO - Configuring all services to start profiling
+2026-09-17 16:28:03.655 - timing_manager - INFO - Waiting for dataset to be configured before configuring timing
+2026-09-17 16:28:03.655 - InferenceResultParser_09eb959f - INFO - Configuring tokenizers for inference result parser (resolve_alias: True)
+2026-09-17 16:28:03.657 - dataset_manager - INFO - Configuring tokenizer(s) for dataset manager
+2026-09-17 16:28:03.685 - server_metrics_manager - INFO - Server Metrics: Capturing baseline metrics...
+2026-09-17 16:28:03.687 - gpu_telemetry_manager - WARNING - GPU Telemetry: http://localhost:9400/metrics is not reachable
+2026-09-17 16:28:03.689 - gpu_telemetry_manager - WARNING - GPU Telemetry: http://localhost:9401/metrics is not reachable
+2026-09-17 16:28:03.691 - system_controller - INFO - DCGM telemetry skipped: no telemetry sources reachable
+2026-09-17 16:28:03.692 - system_controller - INFO - Waiting for result domains: profile, server_metrics
+2026-09-17 16:28:03.735 - http://localhost:8000/metrics - INFO - Skipping unsupported summary metric: http_request_size_bytes
+2026-09-17 16:28:03.735 - http://localhost:8000/metrics - INFO - Skipping unsupported summary metric: http_response_size_bytes
+2026-09-17 16:28:03.739 - system_controller - INFO - Server metrics enabled - 1/1 endpoint(s) reachable.
+2026-09-17 16:28:05.038 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/apertus/resolve/main/config.json "HTTP/1.1 404 Not Found"
+2026-09-17 16:28:05.114 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/apertus/resolve/main/config.json "HTTP/1.1 404 Not Found"
+2026-09-17 16:28:05.121 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/apertus/resolve/main/config.json "HTTP/1.1 404 Not Found"
+2026-09-17 16:28:05.123 - dataset_manager - ERROR - Dataset configuration failed: TokenizerError("Failed to load tokenizer 'apertus': OSError: apertus is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'\nIf this is a private repository, make sure to pass a token having permission to this repo either by logging in with `hf auth login` or by passing `token=<your_token>`")
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'https://huggingface.co/apertus/resolve/main/config.json'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+
+The above exception was the direct cause of the following exception:
+
+huggingface_hub.errors.RepositoryNotFoundError: 404 Client Error. (Request ID: Root=1-6aac1514-0bd8876b112fbc7a2922c95b;30af7fce-e6dc-4293-8ef6-8b234c593258)
+
+Repository Not Found for url: https://huggingface.co/apertus/resolve/main/config.json.
+Please make sure you specified the correct `repo_id` and `repo_type`.
+If you are trying to access a private or gated repo, make sure you are authenticated and your token has the required permissions.
+For more details, see https://huggingface.co/docs/huggingface_hub/authentication
+
+The above exception was the direct cause of the following exception:
+
+OSError: apertus is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `hf auth login` or by passing `token=<your_token>`
+
+During handling of the above exception, another exception occurred:
+
+httpx.HTTPStatusError: Client error '404 Not Found' for url 'https://huggingface.co/apertus/resolve/main/config.json'
+For more information check: https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/nvidia/apertus-benchmark/aiperf-venv/lib/python3.12/site-packages/transformers/utils/hub.py", line 438, in cached_files
+    hf_hub_download(
+  File "/home/nvidia/apertus-benchmark/aiperf-venv/lib/python3.12/site-packages/huggingface_hub/utils/_validators.py", line 91, in _inner_fn
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/nvidia/apertus-benchmark/aiperf-venv/lib/python3.12/site-packages/huggingface_hub/utils/_http.py", line 266, in _inner
+    return fn(*args, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/nvidia/apertus-benchmark/aiperf-venv/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 1043, in hf_hub_download
+    return _hf_hub_download_to_cache_dir(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nvidia/apertus-benchmark/aiperf-venv/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 1190, in _hf_hub_download_to_cache_dir
+    _raise_on_head_call_error(head_call_error, force_download, local_files_only)
+  File "/home/nvidia/apertus-benchmark/aiperf-venv/lib/python3.12/site-packages/huggingface_hub/file_download.py", line 1949, in _raise_on_head_call_error
+    raise head_call_error
+huggingface_hub.errors.RepositoryNotFoundError: 404 Client Error. (Request ID: Root=1-6aac1515-1368ec725b6b488a5908aaa8;915225d1-09d6-48e2-90db-f815e53cb5af)
+
+Repository Not Found for url: https://huggingface.co/apertus/resolve/main/config.json.
+Please make sure you specified the correct `repo_id` and `repo_type`.
+If you are trying to access a private or gated repo, make sure you are authenticated and your token has the required permissions.
+For more details, see https://huggingface.co/docs/huggingface_hub/authentication
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/nvidia/apertus-benchmark/aiperf-venv/lib/python3.12/site-packages/aiperf/common/tokenizer.py", line 502, in from_pretrained
+    return cls._load_from_hub(
+           ^^^^^^^^^^^^^^^^^^^
+  File "/home/nvidia/apertus-benchmark/aiperf-venv/lib/python3.12/site-packages/aiperf/common/tokenizer.py", line 552, in _load_from_hub
+    AutoTokenizer.from_pretrained(
+  File "/home/nvidia/apertus-benchmark/aiperf-venv/lib/python3.12/site-packages/transformers/models/auto/tokenization_auto.py", line 789, in from_pretrained
+    config = PreTrainedConfig.from_pretrained(pretrained_model_name_or_path, **kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nvidia/apertus-benchmark/aiperf-venv/lib/python3.12/site-packages/transformers/configuration_utils.py", line 706, in from_pretrained
+    config_dict, kwargs = cls.get_config_dict(pretrained_model_name_or_path, **kwargs)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nvidia/apertus-benchmark/aiperf-venv/lib/python3.12/site-packages/transformers/configuration_utils.py", line 747, in get_config_dict
+    config_dict, kwargs = cls._get_config_dict(pretrained_model_name_or_path, **kwargs)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nvidia/apertus-benchmark/aiperf-venv/lib/python3.12/site-packages/transformers/configuration_utils.py", line 802, in _get_config_dict
+    resolved_config_file = cached_file(
+                           ^^^^^^^^^^^^
+  File "/home/nvidia/apertus-benchmark/aiperf-venv/lib/python3.12/site-packages/transformers/utils/hub.py", line 294, in cached_file
+    file = cached_files(path_or_repo_id=path_or_repo_id, filenames=[filename], **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nvidia/apertus-benchmark/aiperf-venv/lib/python3.12/site-packages/transformers/utils/hub.py", line 470, in cached_files
+    raise OSError(
+OSError: apertus is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `hf auth login` or by passing `token=<your_token>`
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "/home/nvidia/apertus-benchmark/aiperf-venv/lib/python3.12/site-packages/aiperf/dataset/dataset_manager.py", line 160, in _profile_configure_command
+    await self._do_profile_configure(message)
+  File "/home/nvidia/apertus-benchmark/aiperf-venv/lib/python3.12/site-packages/aiperf/dataset/dataset_manager.py", line 213, in _do_profile_configure
+    await self._configure_dataset_locked()
+  File "/home/nvidia/apertus-benchmark/aiperf-venv/lib/python3.12/site-packages/aiperf/dataset/dataset_manager.py", line 242, in _configure_dataset_locked
+    await self._configure_tokenizer()
+  File "/home/nvidia/apertus-benchmark/aiperf-venv/lib/python3.12/site-packages/aiperf/dataset/dataset_manager.py", line 339, in _configure_tokenizer
+    self.tokenizer = await asyncio.to_thread(
+                     ^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/asyncio/threads.py", line 25, in to_thread
+    return await loop.run_in_executor(None, func_call)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.12/concurrent/futures/thread.py", line 58, in run
+    result = self.fn(*self.args, **self.kwargs)
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/home/nvidia/apertus-benchmark/aiperf-venv/lib/python3.12/site-packages/aiperf/common/tokenizer.py", line 515, in from_pretrained
+    raise TokenizerError(
+aiperf.common.exceptions.TokenizerError: Failed to load tokenizer 'apertus': OSError: apertus is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `hf auth login` or by passing `token=<your_token>`
+2026-09-17 16:28:05.131 - dataset_manager - ERROR - Failed to handle command profile_configure with hook @on_command 🡒 DatasetManager._profile_configure_command: Failed to load tokenizer 'apertus': OSError: apertus is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `hf auth login` or by passing `token=<your_token>`
+2026-09-17 16:28:05.132 - timing_manager - ERROR - Received dataset configuration failed notification from dataset_manager: TokenizerError: Failed to load tokenizer 'apertus': OSError: apertus is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `hf auth login` or by passing `token=<your_token>`
+2026-09-17 16:28:05.133 - timing_manager - ERROR - Failed to handle command profile_configure with hook @on_command 🡒 TimingManager._profile_configure_command: Dataset configuration failed: TokenizerError: Failed to load tokenizer 'apertus': OSError: apertus is not a local folder and is not a valid model identifier listed on 'https://huggingface.co/models'
+If this is a private repository, make sure to pass a token having permission to this repo either by logging in with `hf auth login` or by passing `token=<your_token>`
+2026-09-17 16:28:05.134 - system_controller - ERROR - Error running Hook(func=<bound method SystemController._start_services of <SystemController system_controller (state=starting)>>, params=None) hook for SystemController: Failed to perform operation 'Configure Profiling'
+2026-09-17 16:28:05.134 - system_controller - ERROR - Failed for SystemController (id=system_controller): SystemController._start_services: Failed to perform operation 'Configure Profiling'
+2026-09-17 16:28:05.201 - httpx - INFO - HTTP Request: HEAD https://huggingface.co/apertus/resolve/main/config.json "HTTP/1.1 404 Not Found"
+2026-09-17 17:23:36.111 - aiperf.cli_runner._single_run - INFO - Starting AIPerf System
+2026-09-17 17:23:36.118 - aiperf.config.resolution.resolvers - INFO - [OK] Tokenizer /home/nvidia/hf_cache/hub/models--swiss-ai--Apertus-v1.5-8B/snapshots/a411d838600baf0e3635a3daf66fb7c55fc97bb6/ detected
+2026-09-17 17:23:36.118 - aiperf.config.resolution.resolvers - INFO - 1 tokenizer validated | 0.0s
+2026-09-17 17:23:36.119 - aiperf.config.resolution.resolvers - INFO - Prefetching 1 tokenizer into HF cache...
+2026-09-17 17:23:43.996 - aiperf.config.resolution.resolvers - INFO -   Cached /home/nvidia/hf_cache/hub/models--swiss-ai--Apertus-v1.5-8B/snapshots/a411d838600baf0e3635a3daf66fb7c55fc97bb6/ (7.87s)
+2026-09-17 17:23:44.033 - aiperf.config.resolution.resolvers - INFO - 1 tokenizer cached • 7.9s
+2026-09-17 17:23:44.349 - aiperf - WARNING - Using --osl without ignore_eos or min_tokens in --extra-inputs. Output sequence length cannot be guaranteed unless the server honors these parameters. Consider: --extra-inputs ignore_eos:true (generate until max_tokens) or --extra-inputs min_tokens:<value> (set minimum output length).
+2026-09-17 17:23:44.507 - server_metrics_manager - INFO - Server Metrics: Discovered 1 endpoints: ['http://localhost:8000/metrics']
+2026-09-17 17:23:44.544 - GPUTelemetryJSONLWriter_1aa6129e - INFO - GPU telemetry export enabled: /home/nvidia/apertus-benchmark/apertus-tokenomics/artifacts/bench/v15-8b-tp1-len8k/think/c1/gpu_telemetry_export.jsonl
+2026-09-17 17:23:44.551 - OTelMetricsResultsProcessor_15deedd2 - INFO - Telemetry streaming is disabled (set --otel-url and/or --mlflow-tracking-uri to enable)
+2026-09-17 17:23:44.552 - RecordExportJSONLWriter_49e50930 - INFO - Record metrics export enabled: /home/nvidia/apertus-benchmark/apertus-tokenomics/artifacts/bench/v15-8b-tp1-len8k/think/c1/profile_export.jsonl
+2026-09-17 17:23:44.595 - system_controller - INFO - Registered Worker Manager (id: 'worker_manager')
+2026-09-17 17:23:44.596 - system_controller - INFO - Registered Gpu Telemetry Manager (id: 'gpu_telemetry_manager')
+2026-09-17 17:23:44.632 - system_controller - INFO - Registered Server Metrics Manager (id: 'server_metrics_manager')
+2026-09-17 17:23:44.634 - system_controller - INFO - Registered Dataset Manager (id: 'dataset_manager')
+2026-09-17 17:23:44.674 - system_controller - INFO - Registered Records Manager (id: 'records_manager')
+2026-09-17 17:23:44.739 - system_controller - INFO - Registered Record Processor (id: 'record_processor_f5e9b79c')
+2026-09-17 17:23:44.782 - system_controller - INFO - Registered Timing Manager (id: 'timing_manager')
+2026-09-17 17:23:44.908 - system_controller - INFO - Registered Worker (id: 'worker_8bfeffbd')
+2026-09-17 17:23:44.978 - system_controller - INFO - AIPerf System is CONFIGURING
+2026-09-17 17:23:44.978 - system_controller - INFO - Configuring all services to start profiling
+2026-09-17 17:23:44.981 - timing_manager - INFO - Waiting for dataset to be configured before configuring timing
+2026-09-17 17:23:44.981 - InferenceResultParser_5c000361 - INFO - Configuring tokenizers for inference result parser (resolve_alias: True)
+2026-09-17 17:23:44.982 - dataset_manager - INFO - Configuring tokenizer(s) for dataset manager
+2026-09-17 17:23:45.009 - server_metrics_manager - INFO - Server Metrics: Capturing baseline metrics...
+2026-09-17 17:23:45.009 - gpu_telemetry_manager - WARNING - GPU Telemetry: http://localhost:9400/metrics is not reachable
+2026-09-17 17:23:45.012 - gpu_telemetry_manager - WARNING - GPU Telemetry: http://localhost:9401/metrics is not reachable
+2026-09-17 17:23:45.014 - system_controller - INFO - DCGM telemetry skipped: no telemetry sources reachable
+2026-09-17 17:23:45.014 - system_controller - INFO - Waiting for result domains: profile, server_metrics
+2026-09-17 17:23:45.064 - http://localhost:8000/metrics - INFO - Skipping unsupported summary metric: http_request_size_bytes
+2026-09-17 17:23:45.064 - http://localhost:8000/metrics - INFO - Skipping unsupported summary metric: http_response_size_bytes
+2026-09-17 17:23:45.067 - system_controller - INFO - Server metrics enabled - 1/1 endpoint(s) reachable.
+2026-09-17 17:23:50.152 - InferenceResultParser_5c000361 - INFO - Initialized tokenizers: {'apertus': {'class': 'TokenizersBackend', 'name_or_path': '/home/nvidia/hf_cache/hub/models--swiss-ai--Apertus-v1.5-8B/snapshots/a411d838600baf0e3635a3daf66fb7c55fc97bb6/'}} in 5.17 seconds
+2026-09-17 17:23:50.692 - dataset_manager - INFO - Tokenizer(s) configured in 5.71 seconds
+2026-09-17 17:23:50.692 - dataset_manager - INFO - Configuring dataset for dataset_manager
+2026-09-17 17:23:51.158 - MemoryMapDatasetBackingStore_133f3fd1 - INFO - Memory-mapped backing store initialized (streaming to /tmp/aiperf_mmap_930f73b8ad6a/dataset.dat)
+2026-09-17 17:23:51.215 - MemoryMapDatasetBackingStore_133f3fd1 - INFO - Data file finalized: 100 conversations, 0.29 MB
+2026-09-17 17:23:51.217 - MemoryMapDatasetBackingStore_133f3fd1 - INFO - Index file created: /tmp/aiperf_mmap_930f73b8ad6a/index.dat
+2026-09-17 17:23:51.217 - dataset_manager - INFO - Backing store finalized: client_type=DatasetClientStoreType.MEMORY_MAP format=MemoryMapFormat.CONVERSATION data_file_path=PosixPath('/tmp/aiperf_mmap_930f73b8ad6a/dataset.dat') index_file_path=PosixPath('/tmp/aiperf_mmap_930f73b8ad6a/index.dat') conversation_count=100 total_size_bytes=300408 compressed=False compressed_data_file_path=None compressed_index_file_path=None compressed_size_bytes=0
+2026-09-17 17:23:51.222 - dataset_manager - INFO - sampling strategy: sequential, unique conversations: 100, unique turn count: 100
+2026-09-17 17:23:51.224 - dataset_manager - INFO - Generating inputs.json file at /home/nvidia/apertus-benchmark/apertus-tokenomics/artifacts/bench/v15-8b-tp1-len8k/think/c1/inputs.json
+2026-09-17 17:23:51.234 - dataset_manager - INFO - inputs.json file generated in 0.01 seconds
+2026-09-17 17:23:51.239 - PhaseOrchestrator_b0230284 - INFO - Initialized 2 phase(s): ['Warmup', 'Profiling']
+2026-09-17 17:23:51.392 - dataset_manager - INFO - Dataset client initialized and freed 100 conversations from memory
+2026-09-17 17:23:51.392 - dataset_manager - INFO - Dataset configured in 0.70 seconds
+2026-09-17 17:23:51.394 - system_controller - INFO - All services configured in 6.42 seconds
+2026-09-17 17:23:51.394 - system_controller - INFO - AIPerf System is CONFIGURED
+2026-09-17 17:23:51.397 - server_metrics_manager - INFO - Server Metrics: Started 1 collector(s) successfully
+2026-09-17 17:23:51.398 - system_controller - INFO - All services started profiling successfully
+2026-09-17 17:23:51.399 - system_controller - INFO - AIPerf System is PROFILING
+2026-09-17 17:23:51.402 - RateTiming - INFO - Creating interval generator: pattern=concurrency_burst, rate=None, smoothness=None
+2026-09-17 17:23:51.403 - PhaseRunner - NOTICE - Phase warmup (warmup) started | phase_index=0 | target: 20 requests
+2026-09-17 17:23:51.406 - records_manager - INFO - Credit phase start: warmup
+2026-09-17 17:23:53.475 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 323 tokens (requested 2048, diff -84.2%)
+2026-09-17 17:23:55.901 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 392 tokens (requested 2048, diff -80.9%)
+2026-09-17 17:23:57.267 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 218 tokens (requested 2048, diff -89.4%)
+2026-09-17 17:23:58.157 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 138 tokens (requested 2048, diff -93.3%)
+2026-09-17 17:23:58.650 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 73 tokens (requested 2048, diff -96.4%)
+2026-09-17 17:24:00.097 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 229 tokens (requested 2048, diff -88.8%)
+2026-09-17 17:24:01.774 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 268 tokens (requested 2048, diff -86.9%)
+2026-09-17 17:24:03.622 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 296 tokens (requested 2048, diff -85.5%)
+2026-09-17 17:24:06.641 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 488 tokens (requested 2048, diff -76.2%)
+2026-09-17 17:24:08.029 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 221 tokens (requested 2048, diff -89.2%)
+2026-09-17 17:24:08.691 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 101 tokens (requested 2048, diff -95.1%)
+2026-09-17 17:24:09.167 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 70 tokens (requested 2048, diff -96.6%)
+2026-09-17 17:24:10.792 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 259 tokens (requested 2048, diff -87.4%)
+2026-09-17 17:24:11.224 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 63 tokens (requested 2048, diff -96.9%)
+2026-09-17 17:24:12.115 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 138 tokens (requested 2048, diff -93.3%)
+2026-09-17 17:24:13.632 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 242 tokens (requested 2048, diff -88.2%)
+2026-09-17 17:24:17.558 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 636 tokens (requested 2048, diff -68.9%)
+2026-09-17 17:24:18.118 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 86 tokens (requested 2048, diff -95.8%)
+2026-09-17 17:24:19.915 - PhaseRunner - NOTICE - Phase warmup (warmup) sending complete | sent=20, completed=19, in_flight=1 | sessions: sent=20, completed=19
+2026-09-17 17:24:19.932 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 291 tokens (requested 2048, diff -85.8%)
+2026-09-17 17:24:21.229 - PhaseRunner - NOTICE - Phase warmup (warmup) complete | completed=20, cancelled=0, errors=0 | sessions: completed=20, cancelled=0 | elapsed=29.83s
+2026-09-17 17:24:21.230 - RateTiming - INFO - Creating interval generator: pattern=concurrency_burst, rate=None, smoothness=None
+2026-09-17 17:24:21.231 - PhaseRunner - NOTICE - Phase profiling (profiling) started | phase_index=1 | profiling_index=0 | target: 100 requests
+2026-09-17 17:24:21.231 - server_metrics_manager - INFO - Server Metrics: Warmup complete, capturing final warmup metrics...
+2026-09-17 17:24:21.233 - records_manager - INFO - Credit phase start: profiling
+2026-09-17 17:24:21.241 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 208 tokens (requested 2048, diff -89.8%)
+2026-09-17 17:24:25.348 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 661 tokens (requested 2048, diff -67.7%)
+2026-09-17 17:24:27.573 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 360 tokens (requested 2048, diff -82.4%)
+2026-09-17 17:24:27.631 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 2 tokens (requested 2048, diff -99.9%)
+2026-09-17 17:24:29.150 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 241 tokens (requested 2048, diff -88.2%)
+2026-09-17 17:24:32.757 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 586 tokens (requested 2048, diff -71.4%)
+2026-09-17 17:24:34.099 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 213 tokens (requested 2048, diff -89.6%)
+2026-09-17 17:24:35.920 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 288 tokens (requested 2048, diff -85.9%)
+2026-09-17 17:24:36.823 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 141 tokens (requested 2048, diff -93.1%)
+2026-09-17 17:24:37.479 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 100 tokens (requested 2048, diff -95.1%)
+2026-09-17 17:24:37.999 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 77 tokens (requested 2048, diff -96.2%)
+2026-09-17 17:24:38.244 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 32 tokens (requested 2048, diff -98.4%)
+2026-09-17 17:24:41.202 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 479 tokens (requested 2048, diff -76.6%)
+2026-09-17 17:24:44.031 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 458 tokens (requested 2048, diff -77.6%)
+2026-09-17 17:24:44.107 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 3 tokens (requested 2048, diff -99.9%)
+2026-09-17 17:24:44.244 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 13 tokens (requested 2048, diff -99.4%)
+2026-09-17 17:24:46.825 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 416 tokens (requested 2048, diff -79.7%)
+2026-09-17 17:24:48.298 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 235 tokens (requested 2048, diff -88.5%)
+2026-09-17 17:24:49.122 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 128 tokens (requested 2048, diff -93.8%)
+2026-09-17 17:24:51.745 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 423 tokens (requested 2048, diff -79.3%)
+2026-09-17 17:24:54.639 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 468 tokens (requested 2048, diff -77.1%)
+2026-09-17 17:24:55.060 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 62 tokens (requested 2048, diff -97.0%)
+2026-09-17 17:24:56.181 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 176 tokens (requested 2048, diff -91.4%)
+2026-09-17 17:24:59.328 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 509 tokens (requested 2048, diff -75.1%)
+2026-09-17 17:25:01.109 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 286 tokens (requested 2048, diff -86.0%)
+2026-09-17 17:25:01.650 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 77 tokens (requested 2048, diff -96.2%)
+2026-09-17 17:25:02.514 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 136 tokens (requested 2048, diff -93.4%)
+2026-09-17 17:25:05.354 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 458 tokens (requested 2048, diff -77.6%)
+2026-09-17 17:25:08.601 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 527 tokens (requested 2048, diff -74.3%)
+2026-09-17 17:25:13.261 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 757 tokens (requested 2048, diff -63.0%)
+2026-09-17 17:25:16.707 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 560 tokens (requested 2048, diff -72.7%)
+2026-09-17 17:25:17.411 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 109 tokens (requested 2048, diff -94.7%)
+2026-09-17 17:25:20.942 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 572 tokens (requested 2048, diff -72.1%)
+2026-09-17 17:25:22.162 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 194 tokens (requested 2048, diff -90.5%)
+2026-09-17 17:25:22.706 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 81 tokens (requested 2048, diff -96.0%)
+2026-09-17 17:25:23.681 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 152 tokens (requested 2048, diff -92.6%)
+2026-09-17 17:25:26.520 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 459 tokens (requested 2048, diff -77.6%)
+2026-09-17 17:25:27.139 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 95 tokens (requested 2048, diff -95.4%)
+2026-09-17 17:25:31.793 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 756 tokens (requested 2048, diff -63.1%)
+2026-09-17 17:25:32.480 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 105 tokens (requested 2048, diff -94.9%)
+2026-09-17 17:25:35.931 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 558 tokens (requested 2048, diff -72.8%)
+2026-09-17 17:25:38.016 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 336 tokens (requested 2048, diff -83.6%)
+2026-09-17 17:25:38.681 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 102 tokens (requested 2048, diff -95.0%)
+2026-09-17 17:25:41.458 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 448 tokens (requested 2048, diff -78.1%)
+2026-09-17 17:25:42.226 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 117 tokens (requested 2048, diff -94.3%)
+2026-09-17 17:25:43.141 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 141 tokens (requested 2048, diff -93.1%)
+2026-09-17 17:25:45.188 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 329 tokens (requested 2048, diff -83.9%)
+2026-09-17 17:25:47.791 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 420 tokens (requested 2048, diff -79.5%)
+2026-09-17 17:25:47.891 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 7 tokens (requested 2048, diff -99.7%)
+2026-09-17 17:25:48.636 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 114 tokens (requested 2048, diff -94.4%)
+2026-09-17 17:25:51.501 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 462 tokens (requested 2048, diff -77.4%)
+2026-09-17 17:25:54.710 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 520 tokens (requested 2048, diff -74.6%)
+2026-09-17 17:25:57.634 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 474 tokens (requested 2048, diff -76.9%)
+2026-09-17 17:25:58.145 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 77 tokens (requested 2048, diff -96.2%)
+2026-09-17 17:25:58.985 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 130 tokens (requested 2048, diff -93.7%)
+2026-09-17 17:25:59.043 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 1 tokens (requested 2048, diff -100.0%)
+2026-09-17 17:26:01.028 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 318 tokens (requested 2048, diff -84.5%)
+2026-09-17 17:26:03.154 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 341 tokens (requested 2048, diff -83.3%)
+2026-09-17 17:26:03.705 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 83 tokens (requested 2048, diff -95.9%)
+2026-09-17 17:26:04.109 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 58 tokens (requested 2048, diff -97.2%)
+2026-09-17 17:26:04.517 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 58 tokens (requested 2048, diff -97.2%)
+2026-09-17 17:26:06.660 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 344 tokens (requested 2048, diff -83.2%)
+2026-09-17 17:26:09.469 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 454 tokens (requested 2048, diff -77.8%)
+2026-09-17 17:26:14.025 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 739 tokens (requested 2048, diff -63.9%)
+2026-09-17 17:26:15.210 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 189 tokens (requested 2048, diff -90.8%)
+2026-09-17 17:26:17.600 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 385 tokens (requested 2048, diff -81.2%)
+2026-09-17 17:26:19.244 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 263 tokens (requested 2048, diff -87.2%)
+2026-09-17 17:26:24.924 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 924 tokens (requested 2048, diff -54.9%)
+2026-09-17 17:26:27.530 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 423 tokens (requested 2048, diff -79.3%)
+2026-09-17 17:26:28.906 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 219 tokens (requested 2048, diff -89.3%)
+2026-09-17 17:26:33.055 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 674 tokens (requested 2048, diff -67.1%)
+2026-09-17 17:26:33.743 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 107 tokens (requested 2048, diff -94.8%)
+2026-09-17 17:26:36.887 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 508 tokens (requested 2048, diff -75.2%)
+2026-09-17 17:26:40.376 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 566 tokens (requested 2048, diff -72.4%)
+2026-09-17 17:26:43.109 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 443 tokens (requested 2048, diff -78.4%)
+2026-09-17 17:26:45.934 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 457 tokens (requested 2048, diff -77.7%)
+2026-09-17 17:26:48.064 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 341 tokens (requested 2048, diff -83.3%)
+2026-09-17 17:26:49.066 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 160 tokens (requested 2048, diff -92.2%)
+2026-09-17 17:26:52.133 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 496 tokens (requested 2048, diff -75.8%)
+2026-09-17 17:26:54.231 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 338 tokens (requested 2048, diff -83.5%)
+2026-09-17 17:26:54.986 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 117 tokens (requested 2048, diff -94.3%)
+2026-09-17 17:26:55.492 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 75 tokens (requested 2048, diff -96.3%)
+2026-09-17 17:26:56.587 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 172 tokens (requested 2048, diff -91.6%)
+2026-09-17 17:26:58.180 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 254 tokens (requested 2048, diff -87.6%)
+2026-09-17 17:27:00.424 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 361 tokens (requested 2048, diff -82.4%)
+2026-09-17 17:27:00.906 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 72 tokens (requested 2048, diff -96.5%)
+2026-09-17 17:27:05.106 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 680 tokens (requested 2048, diff -66.8%)
+2026-09-17 17:27:05.878 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 121 tokens (requested 2048, diff -94.1%)
+2026-09-17 17:27:05.994 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 11 tokens (requested 2048, diff -99.5%)
+2026-09-17 17:27:09.866 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 628 tokens (requested 2048, diff -69.3%)
+2026-09-17 17:27:10.689 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 129 tokens (requested 2048, diff -93.7%)
+2026-09-17 17:27:11.597 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 141 tokens (requested 2048, diff -93.1%)
+2026-09-17 17:27:11.970 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 53 tokens (requested 2048, diff -97.4%)
+2026-09-17 17:27:12.609 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 97 tokens (requested 2048, diff -95.3%)
+2026-09-17 17:27:15.524 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 471 tokens (requested 2048, diff -77.0%)
+2026-09-17 17:27:17.384 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 299 tokens (requested 2048, diff -85.4%)
+2026-09-17 17:27:18.658 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 202 tokens (requested 2048, diff -90.1%)
+2026-09-17 17:27:20.556 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 304 tokens (requested 2048, diff -85.2%)
+2026-09-17 17:27:22.267 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 274 tokens (requested 2048, diff -86.6%)
+2026-09-17 17:27:22.892 - PhaseRunner - NOTICE - Phase profiling (profiling) sending complete | sent=100, completed=99, in_flight=1 | sessions: sent=100, completed=99
+2026-09-17 17:27:22.894 - records_manager - INFO - Sent 100 requests. Waiting for all to complete...
+2026-09-17 17:27:22.902 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 97 tokens (requested 2048, diff -95.3%)
+2026-09-17 17:27:25.157 - PhaseRunner - NOTICE - Phase profiling (profiling) complete | completed=100, cancelled=0, errors=0 | sessions: completed=100, cancelled=0 | elapsed=183.93s
+2026-09-17 17:27:25.158 - PhaseOrchestrator_b0230284 - NOTICE - All credits completed
+2026-09-17 17:27:25.160 - records_manager - INFO - Received CREDIT_PHASE_COMPLETE message, Phase complete: PhaseRecordsStats(phase=CreditPhase.PROFILING, phase_index=1, profiling_index=0, phase_name='profiling', phase_kind='profiling', start_ns=1789665861231228317, sent_end_ns=1789666042892526246, requests_end_ns=1789666045157312586, baseline_start_ns=1789665861231201816, baseline_end_ns=1789666045157342749, total_expected_requests=100, expected_duration_sec=None, expected_num_sessions=None, expected_grace_period_sec=None, final_requests_sent=None, final_requests_completed=100, final_requests_cancelled=0, final_request_errors=0, final_sent_sessions=None, final_completed_sessions=None, final_cancelled_sessions=None, timeout_triggered=False, grace_period_timeout_triggered=False, was_cancelled=False, records_end_ns=None, success_records=99, error_records=0)
+2026-09-17 17:27:25.160 - records_manager - NOTICE - All requests have completed, please wait for the results to be processed (currently 99 of 100 records processed)...
+2026-09-17 17:27:25.160 - system_controller - INFO - Received credits complete from 'timing_manager'
+2026-09-17 17:27:25.161 - records_manager - INFO - All credits complete, please wait for the results to be processed...
+2026-09-17 17:27:25.178 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 365 tokens (requested 2048, diff -82.2%)
+2026-09-17 17:27:25.183 - records_manager - INFO - Processed 100 valid requests and 0 errors (100 total).
+2026-09-17 17:27:25.183 - records_manager - INFO - Received all records, processing now...
+2026-09-17 17:27:25.185 - server_metrics_manager - INFO - Server Metrics: Profiling complete, capturing final metrics...
+2026-09-17 17:27:25.188 - records_manager - INFO - Waiting 2.0s for server metrics flush period...
+2026-09-17 17:27:27.157 - records_manager - INFO - Processing records results...
+2026-09-17 17:27:27.914 - system_controller - INFO - Waiting for result domains: server_metrics
+2026-09-17 17:27:28.259 - records_manager - INFO - _finalize_and_process_results completed
+2026-09-17 17:27:28.268 - system_controller - INFO - All results received, initiating shutdown
+2026-09-17 17:27:28.874 - ExporterManager - INFO - Exporting all records
+2026-09-17 17:27:29.008 - ExporterManager - INFO - Exporting console data

@@ -1,0 +1,112 @@
+2026-09-17 16:48:36.999 - aiperf.cli_runner._single_run - INFO - Starting AIPerf System
+2026-09-17 16:48:37.006 - aiperf.config.resolution.resolvers - INFO - [OK] Tokenizer /home/nvidia/hf_cache/hub/models--swiss-ai--Apertus-v1.5-8B/snapshots/a411d838600baf0e3635a3daf66fb7c55fc97bb6/ detected
+2026-09-17 16:48:37.006 - aiperf.config.resolution.resolvers - INFO - 1 tokenizer validated | 0.0s
+2026-09-17 16:48:37.007 - aiperf.config.resolution.resolvers - INFO - Prefetching 1 tokenizer into HF cache...
+2026-09-17 16:48:41.753 - aiperf.config.resolution.resolvers - INFO -   Cached /home/nvidia/hf_cache/hub/models--swiss-ai--Apertus-v1.5-8B/snapshots/a411d838600baf0e3635a3daf66fb7c55fc97bb6/ (4.74s)
+2026-09-17 16:48:41.771 - aiperf.config.resolution.resolvers - INFO - 1 tokenizer cached • 4.8s
+2026-09-17 16:48:42.223 - server_metrics_manager - INFO - Server Metrics: Discovered 1 endpoints: ['http://localhost:8000/metrics']
+2026-09-17 16:48:42.256 - GPUTelemetryJSONLWriter_22245c0c - INFO - GPU telemetry export enabled: /home/nvidia/apertus-benchmark/apertus-tokenomics/artifacts/bench/v15-8b-tp1-len8k/chat/c16/gpu_telemetry_export.jsonl
+2026-09-17 16:48:42.263 - OTelMetricsResultsProcessor_2d80c427 - INFO - Telemetry streaming is disabled (set --otel-url and/or --mlflow-tracking-uri to enable)
+2026-09-17 16:48:42.264 - RecordExportJSONLWriter_a087ab39 - INFO - Record metrics export enabled: /home/nvidia/apertus-benchmark/apertus-tokenomics/artifacts/bench/v15-8b-tp1-len8k/chat/c16/profile_export.jsonl
+2026-09-17 16:48:42.310 - system_controller - INFO - Registered Worker Manager (id: 'worker_manager')
+2026-09-17 16:48:42.396 - system_controller - INFO - Registered Gpu Telemetry Manager (id: 'gpu_telemetry_manager')
+2026-09-17 16:48:42.397 - system_controller - INFO - Registered Server Metrics Manager (id: 'server_metrics_manager')
+2026-09-17 16:48:42.397 - system_controller - INFO - Registered Dataset Manager (id: 'dataset_manager')
+2026-09-17 16:48:42.397 - system_controller - INFO - Registered Records Manager (id: 'records_manager')
+2026-09-17 16:48:42.488 - system_controller - INFO - Registered Timing Manager (id: 'timing_manager')
+2026-09-17 16:48:42.515 - system_controller - INFO - Registered Record Processor (id: 'record_processor_3819eb6b')
+2026-09-17 16:48:42.517 - system_controller - INFO - Registered Record Processor (id: 'record_processor_444c536d')
+2026-09-17 16:48:42.521 - system_controller - INFO - Registered Record Processor (id: 'record_processor_04a1716b')
+2026-09-17 16:48:42.529 - system_controller - INFO - Registered Record Processor (id: 'record_processor_13027329')
+2026-09-17 16:48:42.602 - system_controller - INFO - Registered Worker (id: 'worker_53abda9c')
+2026-09-17 16:48:42.673 - system_controller - INFO - Registered Worker (id: 'worker_f03ba551')
+2026-09-17 16:48:42.674 - system_controller - INFO - Registered Worker (id: 'worker_355be3a8')
+2026-09-17 16:48:42.674 - system_controller - INFO - Registered Worker (id: 'worker_c9795309')
+2026-09-17 16:48:42.675 - system_controller - INFO - Registered Worker (id: 'worker_c8b1765c')
+2026-09-17 16:48:42.675 - system_controller - INFO - Registered Worker (id: 'worker_01da71ec')
+2026-09-17 16:48:42.675 - system_controller - INFO - Registered Worker (id: 'worker_29384b01')
+2026-09-17 16:48:42.676 - system_controller - INFO - Registered Worker (id: 'worker_b8c2839f')
+2026-09-17 16:48:42.696 - system_controller - INFO - AIPerf System is CONFIGURING
+2026-09-17 16:48:42.696 - system_controller - INFO - Configuring all services to start profiling
+2026-09-17 16:48:42.698 - InferenceResultParser_6a47ace1 - INFO - Configuring tokenizers for inference result parser (resolve_alias: True)
+2026-09-17 16:48:42.698 - timing_manager - INFO - Waiting for dataset to be configured before configuring timing
+2026-09-17 16:48:42.698 - InferenceResultParser_34053069 - INFO - Configuring tokenizers for inference result parser (resolve_alias: True)
+2026-09-17 16:48:42.698 - InferenceResultParser_0db93fa0 - INFO - Configuring tokenizers for inference result parser (resolve_alias: True)
+2026-09-17 16:48:42.698 - InferenceResultParser_ea1f6477 - INFO - Configuring tokenizers for inference result parser (resolve_alias: True)
+2026-09-17 16:48:42.699 - dataset_manager - INFO - Configuring tokenizer(s) for dataset manager
+2026-09-17 16:48:42.708 - system_controller - INFO - Registered Worker (id: 'worker_61d921a7')
+2026-09-17 16:48:42.713 - system_controller - INFO - Registered Worker (id: 'worker_9365977a')
+2026-09-17 16:48:42.718 - system_controller - INFO - Registered Worker (id: 'worker_c2686b05')
+2026-09-17 16:48:42.719 - system_controller - INFO - Registered Worker (id: 'worker_3e51cf69')
+2026-09-17 16:48:42.723 - system_controller - INFO - Registered Worker (id: 'worker_4aa89d21')
+2026-09-17 16:48:42.724 - system_controller - INFO - Registered Worker (id: 'worker_b40e8d95')
+2026-09-17 16:48:42.725 - server_metrics_manager - INFO - Server Metrics: Capturing baseline metrics...
+2026-09-17 16:48:42.727 - system_controller - INFO - Registered Worker (id: 'worker_3b440465')
+2026-09-17 16:48:42.731 - gpu_telemetry_manager - WARNING - GPU Telemetry: http://localhost:9400/metrics is not reachable
+2026-09-17 16:48:42.731 - system_controller - INFO - Registered Worker (id: 'worker_333a0f92')
+2026-09-17 16:48:42.733 - gpu_telemetry_manager - WARNING - GPU Telemetry: http://localhost:9401/metrics is not reachable
+2026-09-17 16:48:42.734 - system_controller - INFO - DCGM telemetry skipped: no telemetry sources reachable
+2026-09-17 16:48:42.735 - system_controller - INFO - Waiting for result domains: profile, server_metrics
+2026-09-17 16:48:42.761 - http://localhost:8000/metrics - INFO - Skipping unsupported summary metric: http_request_size_bytes
+2026-09-17 16:48:42.761 - http://localhost:8000/metrics - INFO - Skipping unsupported summary metric: http_response_size_bytes
+2026-09-17 16:48:42.763 - system_controller - INFO - Server metrics enabled - 1/1 endpoint(s) reachable.
+2026-09-17 16:48:47.593 - dataset_manager - INFO - Tokenizer(s) configured in 4.89 seconds
+2026-09-17 16:48:47.594 - dataset_manager - INFO - Configuring dataset for dataset_manager
+2026-09-17 16:48:47.608 - InferenceResultParser_6a47ace1 - INFO - Initialized tokenizers: {'apertus': {'class': 'TokenizersBackend', 'name_or_path': '/home/nvidia/hf_cache/hub/models--swiss-ai--Apertus-v1.5-8B/snapshots/a411d838600baf0e3635a3daf66fb7c55fc97bb6/'}} in 4.91 seconds
+2026-09-17 16:48:48.117 - MemoryMapDatasetBackingStore_b9c5940e - INFO - Memory-mapped backing store initialized (streaming to /tmp/aiperf_mmap_0a41233e2919/dataset.dat)
+2026-09-17 16:48:48.166 - MemoryMapDatasetBackingStore_b9c5940e - INFO - Data file finalized: 100 conversations, 0.29 MB
+2026-09-17 16:48:48.168 - MemoryMapDatasetBackingStore_b9c5940e - INFO - Index file created: /tmp/aiperf_mmap_0a41233e2919/index.dat
+2026-09-17 16:48:48.168 - dataset_manager - INFO - Backing store finalized: client_type=DatasetClientStoreType.MEMORY_MAP format=MemoryMapFormat.CONVERSATION data_file_path=PosixPath('/tmp/aiperf_mmap_0a41233e2919/dataset.dat') index_file_path=PosixPath('/tmp/aiperf_mmap_0a41233e2919/index.dat') conversation_count=100 total_size_bytes=301863 compressed=False compressed_data_file_path=None compressed_index_file_path=None compressed_size_bytes=0
+2026-09-17 16:48:48.173 - dataset_manager - INFO - sampling strategy: sequential, unique conversations: 100, unique turn count: 100
+2026-09-17 16:48:48.175 - dataset_manager - INFO - Generating inputs.json file at /home/nvidia/apertus-benchmark/apertus-tokenomics/artifacts/bench/v15-8b-tp1-len8k/chat/c16/inputs.json
+2026-09-17 16:48:48.182 - system_controller - WARNING - Received command response for service we were not expecting: worker_3b440465. Ignoring.
+2026-09-17 16:48:48.182 - system_controller - WARNING - Received command response for service we were not expecting: worker_9365977a. Ignoring.
+2026-09-17 16:48:48.183 - system_controller - WARNING - Received command response for service we were not expecting: worker_b40e8d95. Ignoring.
+2026-09-17 16:48:48.183 - system_controller - WARNING - Received command response for service we were not expecting: worker_c2686b05. Ignoring.
+2026-09-17 16:48:48.183 - system_controller - WARNING - Received command response for service we were not expecting: worker_61d921a7. Ignoring.
+2026-09-17 16:48:48.183 - system_controller - WARNING - Received command response for service we were not expecting: worker_4aa89d21. Ignoring.
+2026-09-17 16:48:48.183 - system_controller - WARNING - Received command response for service we were not expecting: worker_3e51cf69. Ignoring.
+2026-09-17 16:48:48.184 - system_controller - WARNING - Received command response for service we were not expecting: worker_333a0f92. Ignoring.
+2026-09-17 16:48:48.185 - dataset_manager - INFO - inputs.json file generated in 0.01 seconds
+2026-09-17 16:48:48.193 - PhaseOrchestrator_01808b2c - INFO - Initialized 2 phase(s): ['Warmup', 'Profiling']
+2026-09-17 16:48:48.335 - dataset_manager - INFO - Dataset client initialized and freed 100 conversations from memory
+2026-09-17 16:48:48.335 - dataset_manager - INFO - Dataset configured in 0.74 seconds
+2026-09-17 16:48:48.415 - InferenceResultParser_34053069 - INFO - Initialized tokenizers: {'apertus': {'class': 'TokenizersBackend', 'name_or_path': '/home/nvidia/hf_cache/hub/models--swiss-ai--Apertus-v1.5-8B/snapshots/a411d838600baf0e3635a3daf66fb7c55fc97bb6/'}} in 5.72 seconds
+2026-09-17 16:48:48.551 - InferenceResultParser_ea1f6477 - INFO - Initialized tokenizers: {'apertus': {'class': 'TokenizersBackend', 'name_or_path': '/home/nvidia/hf_cache/hub/models--swiss-ai--Apertus-v1.5-8B/snapshots/a411d838600baf0e3635a3daf66fb7c55fc97bb6/'}} in 5.85 seconds
+2026-09-17 16:48:49.656 - InferenceResultParser_0db93fa0 - INFO - Initialized tokenizers: {'apertus': {'class': 'TokenizersBackend', 'name_or_path': '/home/nvidia/hf_cache/hub/models--swiss-ai--Apertus-v1.5-8B/snapshots/a411d838600baf0e3635a3daf66fb7c55fc97bb6/'}} in 6.96 seconds
+2026-09-17 16:48:49.658 - system_controller - INFO - All services configured in 6.96 seconds
+2026-09-17 16:48:49.658 - system_controller - INFO - AIPerf System is CONFIGURED
+2026-09-17 16:48:49.660 - server_metrics_manager - INFO - Server Metrics: Started 1 collector(s) successfully
+2026-09-17 16:48:49.663 - system_controller - INFO - All services started profiling successfully
+2026-09-17 16:48:49.664 - system_controller - INFO - AIPerf System is PROFILING
+2026-09-17 16:48:49.666 - RateTiming - INFO - Creating interval generator: pattern=concurrency_burst, rate=None, smoothness=None
+2026-09-17 16:48:49.667 - PhaseRunner - NOTICE - Phase warmup (warmup) started | phase_index=0 | target: 20 requests
+2026-09-17 16:48:49.669 - records_manager - INFO - Credit phase start: warmup
+2026-09-17 16:48:51.723 - PhaseRunner - NOTICE - Phase warmup (warmup) sending complete | sent=20, completed=4, in_flight=16 | sessions: sent=20, completed=4
+2026-09-17 16:48:51.744 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 223 tokens (requested 256, diff -12.9%)
+2026-09-17 16:48:53.394 - PhaseRunner - NOTICE - Phase warmup (warmup) complete | completed=20, cancelled=0, errors=0 | sessions: completed=20, cancelled=0 | elapsed=3.73s
+2026-09-17 16:48:53.397 - server_metrics_manager - INFO - Server Metrics: Warmup complete, capturing final warmup metrics...
+2026-09-17 16:48:53.397 - RateTiming - INFO - Creating interval generator: pattern=concurrency_burst, rate=None, smoothness=None
+2026-09-17 16:48:53.397 - PhaseRunner - NOTICE - Phase profiling (profiling) started | phase_index=1 | profiling_index=0 | target: 100 requests
+2026-09-17 16:48:53.400 - records_manager - INFO - Credit phase start: profiling
+2026-09-17 16:49:01.651 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 243 tokens (requested 256, diff -5.1%)
+2026-09-17 16:49:01.651 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 155 tokens (requested 256, diff -39.5%)
+2026-09-17 16:49:01.652 - aiperf.metrics.types.osl_mismatch_metrics - WARNING - OSL mismatch: got 225 tokens (requested 256, diff -12.1%)
+2026-09-17 16:49:05.724 - PhaseRunner - NOTICE - Phase profiling (profiling) sending complete | sent=100, completed=87, in_flight=13 | sessions: sent=100, completed=87
+2026-09-17 16:49:05.726 - records_manager - INFO - Sent 100 requests. Waiting for all to complete...
+2026-09-17 16:49:07.435 - PhaseRunner - NOTICE - Phase profiling (profiling) complete | completed=100, cancelled=0, errors=0 | sessions: completed=100, cancelled=0 | elapsed=14.04s
+2026-09-17 16:49:07.436 - PhaseOrchestrator_01808b2c - NOTICE - All credits completed
+2026-09-17 16:49:07.437 - system_controller - INFO - Received credits complete from 'timing_manager'
+2026-09-17 16:49:07.437 - records_manager - INFO - Received CREDIT_PHASE_COMPLETE message, Phase complete: PhaseRecordsStats(phase=CreditPhase.PROFILING, phase_index=1, profiling_index=0, phase_name='profiling', phase_kind='profiling', start_ns=1789663733397755202, sent_end_ns=1789663745724880267, requests_end_ns=1789663747434713844, baseline_start_ns=1789663733397719821, baseline_end_ns=1789663747434750652, total_expected_requests=100, expected_duration_sec=None, expected_num_sessions=None, expected_grace_period_sec=None, final_requests_sent=None, final_requests_completed=100, final_requests_cancelled=0, final_request_errors=0, final_sent_sessions=None, final_completed_sessions=None, final_cancelled_sessions=None, timeout_triggered=False, grace_period_timeout_triggered=False, was_cancelled=False, records_end_ns=None, success_records=96, error_records=0)
+2026-09-17 16:49:07.438 - records_manager - NOTICE - All requests have completed, please wait for the results to be processed (currently 96 of 100 records processed)...
+2026-09-17 16:49:07.438 - records_manager - INFO - All credits complete, please wait for the results to be processed...
+2026-09-17 16:49:07.459 - records_manager - INFO - Processed 100 valid requests and 0 errors (100 total).
+2026-09-17 16:49:07.459 - records_manager - INFO - Received all records, processing now...
+2026-09-17 16:49:07.463 - records_manager - INFO - Waiting 2.0s for server metrics flush period...
+2026-09-17 16:49:07.488 - server_metrics_manager - INFO - Server Metrics: Profiling complete, capturing final metrics...
+2026-09-17 16:49:09.435 - records_manager - INFO - Processing records results...
+2026-09-17 16:49:09.666 - system_controller - INFO - Waiting for result domains: server_metrics
+2026-09-17 16:49:09.701 - records_manager - INFO - _finalize_and_process_results completed
+2026-09-17 16:49:09.710 - system_controller - INFO - All results received, initiating shutdown
+2026-09-17 16:49:10.316 - ExporterManager - INFO - Exporting all records
+2026-09-17 16:49:10.464 - ExporterManager - INFO - Exporting console data

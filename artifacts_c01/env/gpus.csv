@@ -1,0 +1,3 @@
+index, name, memory.total [MiB], driver_version, compute_cap
+0, NVIDIA H100 NVL, 95830 MiB, 595.71.05, 9.0
+1, NVIDIA H100 NVL, 95830 MiB, 595.71.05, 9.0

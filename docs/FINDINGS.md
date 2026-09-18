@@ -185,3 +185,36 @@ The Spark reports 85× KV capacity but misses a 50 ms ITL interactive budget at 
 Price it on batch and summarize, where latency has no SLO, 
 and its cost per token competes with the datacenter GPU. 
 Price it on chat and it never qualifies at any price.
+
+
+Scaling efficiency is monotonic in the input:output ratio
+workload	ISL/OSL	ratio	tok/s c1 → c8	scaling	ITL c1 → c8	per-user tok/s @ c8
+agent	1024/1024	1.0	14.6 → 94.8	6.48×	68.7 → 70.3	14.3
+chat	512/256	2.0	14.5 → 92.4	6.36×	66.6 → 64.8	15.4
+batch	1024/128	8.0	14.7 → 87.9	5.99×	65.9 → 70.3	14.3
+rag	4096/256	16	13.2 → 61.3	4.63×	68.8 → 91.7	11.1
+summarize	7500/200	37.5	12.7 → 47.4	3.74×	70.5 → 129.2	8.0
+
+Perfectly ordered, five for five. The more input tokens per output token, the worse the Spark batches — because prefill and decode compete for the same scarce resource, and chunked prefill steals decode steps. ITL confirms the mechanism: flat for decode-dominated shapes, +83% for the most prefill-dominated one.
+
+I had this backwards. I predicted prefill-heavy work would suit the Spark because its FP4 compute is strong. The data says the opposite, decisively, and the monotonicity makes it more than an anecdote. Worth saying so in the write-up — a prediction, a measurement that refuted it, and a mechanism is a better story than a confirmation.
+
+The machine's signature: per-user speed is pinned near 15 tok/s regardless of load. Not a wall you hit — a constant you live with. Worth noting that's roughly comfortable reading pace, so for one user it's usable; it just never gets faster, for anyone.
+
+Cost, and the experiment you still need
+
+At $0.22/h, best rung per workload:
+
+workload	tok/s @ c8	$/1M out
+agent	94.8	$0.65
+chat	92.4	$0.66
+batch	87.9	$0.70
+rag	61.3	$1.00
+summarize	47.4	$1.29
+
+Your H100 chat baseline was $0.38. So the Spark loses on cost per token today — but it was still scaling at 80% efficiency at c8, capped by --max-num-seqs 8, not by hardware.
+
+It needs 159 tok/s to match the H100. At 80% scaling efficiency, c16 lands around 165–175. The crossover is one rung away.
+
+Your spark-v15-8b-seqs32 run only has chat c1 (14.4 tok/s, ITL 68.8 — identical single-stream, as expected). Finish it:
+

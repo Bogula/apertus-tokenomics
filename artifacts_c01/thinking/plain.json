@@ -1,0 +1,99 @@
+{
+ "tag": "plain",
+ "n": 8,
+ "total_completion_tokens": 1938,
+ "visible_char_share": 1.0,
+ "est_visible_tokens": 1938,
+ "accuracy": 0.875,
+ "mean_latency_s": 1.48,
+ "rows": [
+  {
+   "elapsed_s": 0.72,
+   "completion_tokens": 111,
+   "prompt_tokens": 106,
+   "reasoning_chars": 0,
+   "visible_chars": 207,
+   "visible": "Let the cost of the ball be \\( x \\) CHF.  \nThen the bat costs \\( x + 1 \\) CHF.  \nTogether they cost 1.10 CHF, so:\n\n\\[\nx + (x + 1) = 1.10\n\\]\n\n\\[\n2x + 1 = 1.10\n\\]\n\n\\[\n2x = 0.10\n\\]\n\n\\[\nx = 0.05\n\\]\n\nANSWER: 0.05",
+   "finish_reason": "stop",
+   "name": "bat_ball",
+   "correct": true
+  },
+  {
+   "elapsed_s": 1.62,
+   "completion_tokens": 265,
+   "prompt_tokens": 104,
+   "reasoning_chars": 0,
+   "visible_chars": 869,
+   "visible": "To find the time until the two trains meet, we can use the concept of relative speed.\n\n1. **Identify the speeds of the trains:**\n   - Train 1 speed: \\( 70 \\, \\text{km/h} \\)\n   - Train 2 speed: \\( 80 \\, \\text{km/h} \\)\n\n2. **Determine the relative speed:**\n   Since the trains are moving toward each other, their relative speed is the sum of their individual speeds:\n   \\[\n   \\text{Relative speed} = 70 \\, \\text{km/h} + 80 \\, \\text{km/h} = 150 \\, \\text{km/h}\n   \\]\n\n3. **Calculate the total distance between the trains:**\n   The trains are initially \\( 300 \\, \\text{km} \\) apart.\n\n4. **Use the formula for time:**\n   The time \\( t \\) it takes for the trains to meet is given by:\n   \\[\n   t = \\frac{\\text{Total distance}}{\\text{Relative speed}}\n   \\]\n   Substituting the values:\n   \\[\n   t = \\frac{300 \\, \\text{km}}{150 \\, \\text{km/h}} = 2 \\, \\text{hours}\n   \\]\n\nANSWER: 2",
+   "finish_reason": "stop",
+   "name": "trains",
+   "correct": true
+  },
+  {
+   "elapsed_s": 0.85,
+   "completion_tokens": 138,
+   "prompt_tokens": 102,
+   "reasoning_chars": 0,
+   "visible_chars": 509,
+   "visible": "To guarantee a matching pair of socks, we need to consider the worst-case scenario. The worst-case scenario is drawing one sock of each color before getting a second sock of the same color.\n\n- There are 10 red socks and 10 blue socks.\n- In the worst case, you could draw all 10 red socks and then all 10 blue socks. That would be 10 + 10 = 20 socks.\n- The next sock (the 21st sock) must be either red or blue, thus creating a matching pair.\n\nTherefore, drawing 21 socks guarantees a matching pair.\n\nANSWER: 21",
+   "finish_reason": "stop",
+   "name": "socks",
+   "correct": false
+  },
+  {
+   "elapsed_s": 1.65,
+   "completion_tokens": 270,
+   "prompt_tokens": 107,
+   "reasoning_chars": 0,
+   "visible_chars": 598,
+   "visible": "To calculate the final amount after a sum grows at a 10% annual interest rate over 3 years, we use the compound interest formula:  \n\\[ A = P \\times (1 + r)^t \\]  \nwhere:  \n- \\( P = 1000 \\) CHF (initial principal),  \n- \\( r = 0.10 \\) (annual growth rate),  \n- \\( t = 3 \\) (number of years).  \n\nSubstituting the values:  \n\\[ A = 1000 \\times (1 + 0.10)^3 = 1000 \\times (1.10)^3 \\]  \n\nCalculating \\( (1.10)^3 \\):  \n\\[ 1.10 \\times 1.10 = 1.21 \\]  \n\\[ 1.21 \\times 1.10 = 1.331 \\]  \n\nThus:  \n\\[ A = 1000 \\times 1.331 = 1331 \\]  \n\nRounded to the nearest franc, the final amount is 1331 CHF.  \n\nANSWER: 1331",
+   "finish_reason": "stop",
+   "name": "compound",
+   "correct": true
+  },
+  {
+   "elapsed_s": 1.03,
+   "completion_tokens": 168,
+   "prompt_tokens": 90,
+   "reasoning_chars": 0,
+   "visible_chars": 492,
+   "visible": "To determine the day of the week 100 days from Wednesday, we can use modular arithmetic based on the 7-day cycle of the week.\n\n1. Each week has 7 days.\n2. To find the remainder when 100 is divided by 7, we calculate:  \n   \\( 100 \\div 7 = 14 \\) with a remainder of \\( 2 \\) (since \\( 14 \\times 7 = 98 \\), and \\( 100 - 98 = 2 \\)).\n3. This means 100 days is equivalent to adding 2 days to Wednesday.\n4. Starting from Wednesday:\n   - 1 day later: Thursday\n   - 2 days later: Friday\n\nANSWER: Friday",
+   "finish_reason": "stop",
+   "name": "days",
+   "correct": true
+  },
+  {
+   "elapsed_s": 3.27,
+   "completion_tokens": 541,
+   "prompt_tokens": 88,
+   "reasoning_chars": 0,
+   "visible_chars": 1262,
+   "visible": "To determine how many prime numbers are strictly between 20 and 40, we first list the numbers in this range: 21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 31, 32, 33, 34, 35, 36, 37, 38, 39.\n\nNext, we identify which of these numbers are prime. A prime number is a number greater than 1 that has no positive divisors other than 1 and itself.\n\n- 21: Divisible by 3 and 7 (not prime)\n- 22: Divisible by 2 and 11 (not prime)\n- 23: Not divisible by any prime less than \u221a23 (~4.8) (2, 3). Prime\n- 24: Divisible by 2, 3, etc. (not prime)\n- 25: Divisible by 5 (not prime)\n- 26: Divisible by 2 and 13 (not prime)\n- 27: Divisible by 3 (not prime)\n- 28: Divisible by 2, 4, 7 (not prime)\n- 29: Not divisible by any prime less than \u221a29 (~5.4). Prime\n- 30: Divisible by 2, 3, 5 (not prime)\n- 31: Not divisible by any prime less than \u221a31 (~5.6). Prime\n- 32: Divisible by 2 (not prime)\n- 33: Divisible by 3 and 11 (not prime)\n- 34: Divisible by 2 and 17 (not prime)\n- 35: Divisible by 5 and 7 (not prime)\n- 36: Divisible by 2, 3, etc. (not prime)\n- 37: Not divisible by any prime less than \u221a37 (~6.1). Prime\n- 38: Divisible by 2 and 19 (not prime)\n- 39: Divisible by 3 and 13 (not prime)\n\nThe prime numbers between 20 and 40 are 23, 29, 31, and 37. There are 4 such primes.\n\nANSWER: 4",
+   "finish_reason": "stop",
+   "name": "primes",
+   "correct": true
+  },
+  {
+   "elapsed_s": 1.27,
+   "completion_tokens": 208,
+   "prompt_tokens": 102,
+   "reasoning_chars": 0,
+   "visible_chars": 489,
+   "visible": "Let \\( B \\) be Ben's current age and \\( A \\) be Anna's current age.\n\nFrom the problem:\n1. Anna is twice as old as Ben: \\( A = 2B \\).\n2. In 6 years, Anna will be \\( 1.5 \\) times Ben's age: \\( A + 6 = 1.5(B + 6) \\).\n\nSubstitute \\( A = 2B \\) into the second equation:\n\\[\n2B + 6 = 1.5(B + 6)\n\\]\n\nExpand the right side:\n\\[\n2B + 6 = 1.5B + 9\n\\]\n\nSubtract \\( 1.5B \\) from both sides:\n\\[\n0.5B + 6 = 9\n\\]\n\nSubtract 6 from both sides:\n\\[\n0.5B = 3\n\\]\n\nMultiply both sides by 2:\n\\[\nB = 6\n\\]\n\nANSWER: 6",
+   "finish_reason": "stop",
+   "name": "ages",
+   "correct": true
+  },
+  {
+   "elapsed_s": 1.45,
+   "completion_tokens": 237,
+   "prompt_tokens": 101,
+   "reasoning_chars": 0,
+   "visible_chars": 639,
+   "visible": "Let the capacity of the tank be \\( C \\).\n\n- Tap A fills the tank in 6 hours, so its rate is \\( \\frac{C}{6} \\).\n- Tap B fills the tank in 12 hours, so its rate is \\( \\frac{C}{12} \\).\n\nWhen both taps are open, their rates add:\n\n\\[\n\\text{Combined rate} = \\frac{C}{6} + \\frac{C}{12}\n\\]\n\nFind a common denominator (12):\n\n\\[\n\\frac{C}{6} = \\frac{2C}{12}\n\\]\n\n\\[\n\\text{Combined rate} = \\frac{2C}{12} + \\frac{C}{12} = \\frac{3C}{12} = \\frac{C}{4}\n\\]\n\nThe combined rate is \\( \\frac{C}{4} \\), meaning the tank is filled in \\( \\frac{1}{\\text{rate}} \\) hours:\n\n\\[\n\\text{Time} = \\frac{1}{\\frac{C}{4}} = \\frac{4}{C} \\times C = 4 \\text{ hours}\n\\]\n\nANSWER: 4",
+   "finish_reason": "stop",
+   "name": "water",
+   "correct": true
+  }
+ ]
+}
