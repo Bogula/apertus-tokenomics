@@ -1,0 +1,50 @@
+{
+  "_README": [
+    "Hosted, OpenAI-compatible endpoints to benchmark alongside the self-hosted runs.",
+    "api_key_env names a variable in .env - never put a key in this file, it is committed.",
+    "rate_limit_rps is a HARD cap passed to aiperf --request-rate. Exceeding a provider's",
+    "limit produces 429s that look like latency and silently corrupt your TTFT numbers.",
+    "input/output_usd_per_mtok come from the provider's rate card. For a hosted endpoint",
+    "these ARE the cost - throughput does not enter the calculation at all.",
+    "ladder: concurrency rungs. Keep them low; you are measuring their rate limiter,",
+    "not their hardware, and every rung spends your token quota."
+  ],
+  "endpoints": {
+    "swisscom-apertus-70b": {
+      "base_url": "https://api.swisscom.com/products/swiss-ai-weeks/apertus-1.5-70b/v1",
+      "model": "swiss-ai/Apertus-v1.5-70B",
+      "tokenizer": "swiss-ai/Apertus-v1.5-70B",
+      "api_key_env": "SWISSCOM_API_KEY",
+      "rate_limit_rps": 5,
+      "ladder": [
+        1
+      ],
+      "input_usd_per_mtok": null,
+      "output_usd_per_mtok": null,
+      "verified": false,
+      "quota": {
+        "input_mtok": 10,
+        "output_mtok": 2.5
+      },
+      "notes": "THE comparator: identical weights to the self-hosted 70B, zero model confound. Bearer expires after 60 min. Free hackathon tier, so no per-token price exists - find the commercial rate or state plainly that you are comparing against a free tier."
+    },
+    "vendor-b": {
+      "base_url": "https://REPLACE.example.com/v1",
+      "model": "REPLACE",
+      "tokenizer": "REPLACE",
+      "api_key_env": "VENDOR_B_API_KEY",
+      "rate_limit_rps": 10,
+      "ladder": [
+        1,
+        2,
+        4,
+        8
+      ],
+      "input_usd_per_mtok": null,
+      "output_usd_per_mtok": null,
+      "verified": false,
+      "quota": null,
+      "notes": "Copy this block per endpoint. Set verified=true only with a rate-card URL."
+    }
+  }
+}
