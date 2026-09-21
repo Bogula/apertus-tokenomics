@@ -1,0 +1,38 @@
+
+===========================================
+== NVIDIA Inference Microservice LLM NIM ==
+===========================================
+
+NVIDIA Release  (build 259606936)
+NVIDIA Inference Microservice LLM NIM Version 1.15.5
+
+Container image Copyright (c) 2016-2026, NVIDIA CORPORATION & AFFILIATES. All rights reserved.\n
+This NIM container is governed by the NVIDIA AI Product Agreement here:
+https://www.nvidia.com/en-us/data-center/products/nvidia-ai-enterprise/eula/.
+A copy of this license can be found under /opt/nim/LICENSE.
+
+The use of this model is governed by the AI Foundation Models Community License
+here: https://docs.nvidia.com/ai-foundation-models-community-license.pdf.
+/opt/nim/llm/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py:63: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+/opt/nim/llm/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py:63: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+INFO 09-21 19:33:57 [__init__.py:216] Automatically detected platform cuda.
+
+/opt/nim/llm/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py:63: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+INFO 09-21 19:34:11 [__init__.py:216] Automatically detected platform cuda.
+Traceback (most recent call last):
+  File "/opt/nim/llm/.venv/bin/list-model-profiles", line 10, in <module>
+    sys.exit(print_system_and_profile_summaries())
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/nim/llm/nim_llm_sdk/hub/info.py", line 42, in print_system_and_profile_summaries
+    engine_args = prepare_workspace_from_repo(repo, engine_args, model_name, None)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/nim/llm/nim_llm_sdk/hub/ngc_injector.py", line 173, in prepare_workspace_from_repo
+    cached = repo.get_all()
+             ^^^^^^^^^^^^^^
+  File "/opt/nim/llm/nim_llm_sdk/hub/repo.py", line 210, in get_all
+    cached_files = self.repo.get_all()
+                   ^^^^^^^^^^^^^^^^^^^
+Exception: error decoding response body

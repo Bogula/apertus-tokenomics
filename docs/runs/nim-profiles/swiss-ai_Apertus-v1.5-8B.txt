@@ -1,0 +1,104 @@
+
+===========================================
+== NVIDIA Inference Microservice LLM NIM ==
+===========================================
+
+NVIDIA Release  (build 259606936)
+NVIDIA Inference Microservice LLM NIM Version 1.15.5
+
+Container image Copyright (c) 2016-2026, NVIDIA CORPORATION & AFFILIATES. All rights reserved.\n
+This NIM container is governed by the NVIDIA AI Product Agreement here:
+https://www.nvidia.com/en-us/data-center/products/nvidia-ai-enterprise/eula/.
+A copy of this license can be found under /opt/nim/LICENSE.
+
+The use of this model is governed by the AI Foundation Models Community License
+here: https://docs.nvidia.com/ai-foundation-models-community-license.pdf.
+/opt/nim/llm/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py:63: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+/opt/nim/llm/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py:63: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+INFO 09-21 19:22:36 [__init__.py:216] Automatically detected platform cuda.
+
+/opt/nim/llm/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py:63: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+INFO 09-21 19:22:48 [__init__.py:216] Automatically detected platform cuda.
+INFO 2026-09-21 19:22:53.556 tokio.rs:681] Downloaded filename: .gitattributes to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-v1.5-8B/blobs/d654c71444c34791b2c2a4c24691bd1472118aba"
+INFO 2026-09-21 19:22:54.344 tokio.rs:681] Downloaded filename: Apertus_1_5_EU_Code_of_Practice.pdf to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-v1.5-8B/blobs/2e4b304b04e445632f074ae10481386a72e97945c8a6b8ae8788a73f2b3c72e5"
+INFO 2026-09-21 19:22:55.181 tokio.rs:681] Downloaded filename: Apertus_1_5_EU_Public_Summary.pdf to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-v1.5-8B/blobs/09275f31dffa639f993c8727ccc10f950e1e4fa6c6a15be9d9c44989577e9fd4"
+INFO 2026-09-21 19:22:55.436 tokio.rs:681] Downloaded filename: LICENSE.txt to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-v1.5-8B/blobs/261eeb9e9f8b2b4b0d119366dda99c6fd7d35c64"
+INFO 2026-09-21 19:22:55.650 tokio.rs:681] Downloaded filename: PRIVACY_POLICY.pdf to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-v1.5-8B/blobs/1a63e836368174f10c97d99a10f35655d0b92458"
+INFO 2026-09-21 19:22:55.827 tokio.rs:681] Downloaded filename: README.md to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-v1.5-8B/blobs/ae684149b9ea7143ec1dabb8ac1536a73f137dee"
+INFO 2026-09-21 19:22:56.019 tokio.rs:681] Downloaded filename: USAGE_POLICY.pdf to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-v1.5-8B/blobs/8ddd8e25b6672340dd4f921ba623578571a65526"
+INFO 2026-09-21 19:22:56.808 tokio.rs:681] Downloaded filename: assets/text_performance_plot.png to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-v1.5-8B/blobs/5183f403871fe56745c38822a72d3c50e53a76d2cae4acadb67a9e253595bd61"
+INFO 2026-09-21 19:22:57.734 tokio.rs:681] Downloaded filename: assets/visual_performance_plot.png to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-v1.5-8B/blobs/f3fe104ab0b8081a8bd6b41c2f5684349c788c926acbb7d67aa496c87d2c52e2"
+INFO 2026-09-21 19:22:57.981 tokio.rs:681] Downloaded filename: chat_template.jinja to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-v1.5-8B/blobs/a0707308b76caa7f3916a8c9b0aa2ab45b13b9c7"
+INFO 2026-09-21 19:22:58.154 tokio.rs:681] Downloaded filename: config.json to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-v1.5-8B/blobs/c07b7c03d8ec3196de2e51716a8990aa5ef39a50"
+INFO 2026-09-21 19:22:58.331 tokio.rs:681] Downloaded filename: generation_config.json to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-v1.5-8B/blobs/03f863248858c7a86747dec945dad7c751b66f71"
+INFO 2026-09-21 19:23:42.141 tokio.rs:681] Downloaded filename: model-apertus-model-00001-of-00004.safetensors to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-v1.5-8B/blobs/60d31e2d767d389ba990972a21cd0524e18c1ed39b65fcc727285db613ea81dc"
+INFO 2026-09-21 19:24:36.637 tokio.rs:681] Downloaded filename: model-apertus-model-00002-of-00004.safetensors to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-v1.5-8B/blobs/8a0ae0ba1c37a5571276f042085c8f782b6f02c68a888acf1ae35c33b8253bd9"
+INFO 2026-09-21 19:25:16.631 tokio.rs:681] Downloaded filename: model-apertus-model-00003-of-00004.safetensors to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-v1.5-8B/blobs/17f4ce43b67eacee899b6f23664d6b457259b2fbc89f5561cd69831d34a412c0"
+INFO 2026-09-21 19:26:05.080 tokio.rs:681] Downloaded filename: model-apertus-model-00004-of-00004.safetensors to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-v1.5-8B/blobs/40bf7c8ba48bfe6748b6cf796bfe65cea0115fe74d0aa38ad5fcdb6af2cf3e0d"
+INFO 2026-09-21 19:26:15.147 tokio.rs:681] Downloaded filename: model-vision_tokenizer-model.safetensors to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-v1.5-8B/blobs/0f358b3c908d216172675cd57184ff6ce310705e385fedfd31c6f34e8197f9c8"
+INFO 2026-09-21 19:26:19.193 tokio.rs:681] Downloaded filename: model-wavtokenizer-model.safetensors to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-v1.5-8B/blobs/b2632390709c3cb1319d1a0c1387d5364587b8a78a00efa2e93f15185ae82c02"
+INFO 2026-09-21 19:26:19.383 tokio.rs:681] Downloaded filename: model.safetensors.index.json to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-v1.5-8B/blobs/b73f2c52f058410e95a520a255bb1da2987f9bbf"
+INFO 2026-09-21 19:26:19.564 tokio.rs:681] Downloaded filename: processor_config.json to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-v1.5-8B/blobs/cff23562a58ac775e81d0aeb0f446a80608881bc"
+INFO 2026-09-21 19:26:19.745 tokio.rs:681] Downloaded filename: special_tokens_map.json to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-v1.5-8B/blobs/a782b2f1cdab4d0bacb2dc0f85d02c4b1e31f0bd"
+INFO 2026-09-21 19:26:20.917 tokio.rs:681] Downloaded filename: tokenizer.json to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-v1.5-8B/blobs/1f2f6198ea5789e5a90ec7c5ec5cf0d5242cf5b8de007105537c91d777581582"
+INFO 2026-09-21 19:26:21.104 tokio.rs:681] Downloaded filename: tokenizer_config.json to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-v1.5-8B/blobs/6d25132cef332366ba086bd97f682d3df3918812"
+INFO 2026-09-21 19:26:21.109 ngc_injector.py:185] Model workspace is now ready. It took 207.859 seconds
+is_vgpu indes: 0
+is_vgpu indes: 1
+SYSTEM INFO
+- Free GPUs:
+  -  [2321:10de] (1) NVIDIA H100 NVL[current utilization: 0%]
+- Non-free GPUs:
+  -  [2321:10de] (0) NVIDIA H100 NVL[current utilization: 86%]
+INFO 2026-09-21 19:26:21.525 manifest.rs:160] first-level manifest validation skipped for version 1 schema
+INFO 2026-09-21 19:26:21.525 manifest.rs:160] first-level manifest validation skipped for version 1 schema
+INFO 2026-09-21 19:26:21.525 manifest.rs:160] first-level manifest validation skipped for version 1 schema
+INFO 2026-09-21 19:26:21.526 utils.py:130] Found following files in /tmp/Apertus-v1_5-8B-nubdpdrf
+INFO 2026-09-21 19:26:21.526 utils.py:134] ├── .gitattributes
+INFO 2026-09-21 19:26:21.526 utils.py:134] ├── Apertus_1_5_EU_Code_of_Practice.pdf
+INFO 2026-09-21 19:26:21.526 utils.py:134] ├── Apertus_1_5_EU_Public_Summary.pdf
+INFO 2026-09-21 19:26:21.526 utils.py:134] ├── LICENSE.txt
+INFO 2026-09-21 19:26:21.526 utils.py:134] ├── PRIVACY_POLICY.pdf
+INFO 2026-09-21 19:26:21.526 utils.py:134] ├── README.md
+INFO 2026-09-21 19:26:21.526 utils.py:134] ├── USAGE_POLICY.pdf
+INFO 2026-09-21 19:26:21.526 utils.py:134] ├── assets
+INFO 2026-09-21 19:26:21.526 utils.py:130] Found following files in /tmp/Apertus-v1_5-8B-nubdpdrf/assets
+INFO 2026-09-21 19:26:21.526 utils.py:134] │   ├── text_performance_plot.png
+INFO 2026-09-21 19:26:21.526 utils.py:134] │   └── visual_performance_plot.png
+INFO 2026-09-21 19:26:21.526 utils.py:134] ├── chat_template.jinja
+INFO 2026-09-21 19:26:21.526 utils.py:134] ├── config.json
+INFO 2026-09-21 19:26:21.526 utils.py:134] ├── generation_config.json
+INFO 2026-09-21 19:26:21.526 utils.py:134] ├── model-apertus-model-00001-of-00004.safetensors
+INFO 2026-09-21 19:26:21.526 utils.py:134] ├── model-apertus-model-00002-of-00004.safetensors
+INFO 2026-09-21 19:26:21.526 utils.py:134] ├── model-apertus-model-00003-of-00004.safetensors
+INFO 2026-09-21 19:26:21.526 utils.py:134] ├── model-apertus-model-00004-of-00004.safetensors
+INFO 2026-09-21 19:26:21.526 utils.py:134] ├── model-vision_tokenizer-model.safetensors
+INFO 2026-09-21 19:26:21.526 utils.py:134] ├── model-wavtokenizer-model.safetensors
+INFO 2026-09-21 19:26:21.526 utils.py:134] ├── model.safetensors.index.json
+INFO 2026-09-21 19:26:21.526 utils.py:134] ├── processor_config.json
+INFO 2026-09-21 19:26:21.526 utils.py:134] ├── special_tokens_map.json
+INFO 2026-09-21 19:26:21.526 utils.py:134] ├── tokenizer.json
+INFO 2026-09-21 19:26:21.526 utils.py:134] └── tokenizer_config.json
+[2026-09-21 19:26:29] INFO config.py:54: PyTorch version 2.9.0a0+145a3a7bda.nv25.10 available.
+[2026-09-21 19:26:52] WARNING utils.py:147: MOE_RUNNER_BACKEND is not initialized, using triton backend
+[2026-09-21 19:26:52] WARNING registry.py:97: Ignore import error when loading sglang.srt.models.torch_native_llama: tensor model parallel group is not initialized
+INFO 2026-09-21 19:26:52.967 profile_utils.py:766] Model architecture: ['Apertus1p5ForConditionalGeneration'] is not supported in any available inference backends. Please check with NIM support.
+ERROR 2026-09-21 19:26:52.967 info.py:62] An error was encountered while printing profile summary: No valid backend detected for model: '/tmp/Apertus-v1_5-8B-nubdpdrf'. Strategies applied: [<class 'nim_llm_sdk.hub.profile_utils.FormatStrategy'>, <class 'nim_llm_sdk.hub.profile_utils.ArchitectureStrategy'>]. Content of model directory '/tmp/Apertus-v1_5-8B-nubdpdrf': ['assets', 'model-apertus-model-00002-of-00004.safetensors', 'README.md', 'chat_template.jinja', 'Apertus_1_5_EU_Public_Summary.pdf', 'special_tokens_map.json', 'model-apertus-model-00001-of-00004.safetensors', '.gitattributes', 'tokenizer.json', 'Apertus_1_5_EU_Code_of_Practice.pdf', 'LICENSE.txt', 'PRIVACY_POLICY.pdf', 'USAGE_POLICY.pdf', 'model-apertus-model-00004-of-00004.safetensors', 'model-vision_tokenizer-model.safetensors', 'model-wavtokenizer-model.safetensors', 'generation_config.json', 'processor_config.json', 'config.json', 'model-apertus-model-00003-of-00004.safetensors', 'model.safetensors.index.json', 'tokenizer_config.json']
+Traceback (most recent call last):
+  File "/opt/nim/llm/nim_llm_sdk/hub/info.py", line 60, in print_system_and_profile_summaries
+    print(profiles_summary(system, engine_args))
+          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/opt/nim/llm/nim_llm_sdk/hub/ngc_profile.py", line 431, in profiles_summary
+    grouped_profiles_without_lora = categorize_profiles(
+                                    ^^^^^^^^^^^^^^^^^^^^
+  File "/opt/nim/llm/nim_llm_sdk/hub/ngc_profile.py", line 238, in categorize_profiles
+    profile_selector = ProfileFilter(
+                       ^^^^^^^^^^^^^^
+  File "/opt/nim/llm/nim_llm_sdk/hub/profile_utils.py", line 805, in __init__
+    self._update_allowed_backends()
+  File "/opt/nim/llm/nim_llm_sdk/hub/profile_utils.py", line 818, in _update_allowed_backends
+    raise ValueError(
+ValueError: No valid backend detected for model: '/tmp/Apertus-v1_5-8B-nubdpdrf'. Strategies applied: [<class 'nim_llm_sdk.hub.profile_utils.FormatStrategy'>, <class 'nim_llm_sdk.hub.profile_utils.ArchitectureStrategy'>]. Content of model directory '/tmp/Apertus-v1_5-8B-nubdpdrf': ['assets', 'model-apertus-model-00002-of-00004.safetensors', 'README.md', 'chat_template.jinja', 'Apertus_1_5_EU_Public_Summary.pdf', 'special_tokens_map.json', 'model-apertus-model-00001-of-00004.safetensors', '.gitattributes', 'tokenizer.json', 'Apertus_1_5_EU_Code_of_Practice.pdf', 'LICENSE.txt', 'PRIVACY_POLICY.pdf', 'USAGE_POLICY.pdf', 'model-apertus-model-00004-of-00004.safetensors', 'model-vision_tokenizer-model.safetensors', 'model-wavtokenizer-model.safetensors', 'generation_config.json', 'processor_config.json', 'config.json', 'model-apertus-model-00003-of-00004.safetensors', 'model.safetensors.index.json', 'tokenizer_config.json']

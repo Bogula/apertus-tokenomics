@@ -1,0 +1,34 @@
+
+===========================================
+== NVIDIA Inference Microservice LLM NIM ==
+===========================================
+
+NVIDIA Release  (build 259606936)
+NVIDIA Inference Microservice LLM NIM Version 1.15.5
+
+Container image Copyright (c) 2016-2026, NVIDIA CORPORATION & AFFILIATES. All rights reserved.\n
+This NIM container is governed by the NVIDIA AI Product Agreement here:
+https://www.nvidia.com/en-us/data-center/products/nvidia-ai-enterprise/eula/.
+A copy of this license can be found under /opt/nim/LICENSE.
+
+The use of this model is governed by the AI Foundation Models Community License
+here: https://docs.nvidia.com/ai-foundation-models-community-license.pdf.
+/opt/nim/llm/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py:63: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+/opt/nim/llm/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py:63: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+INFO 09-21 18:46:41 [__init__.py:216] Automatically detected platform cuda.
+
+/opt/nim/llm/.venv/lib/python3.12/site-packages/torch/cuda/__init__.py:63: FutureWarning: The pynvml package is deprecated. Please install nvidia-ml-py instead. If you did not install pynvml directly, please report this to the maintainers of the package that installed pynvml for you.
+  import pynvml  # type: ignore[import]
+INFO 09-21 18:46:54 [__init__.py:216] Automatically detected platform cuda.
+INFO 2026-09-21 18:46:59.337 tokio.rs:681] Downloaded filename: .eval_results/lexam.yaml to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-8B-Instruct-2509/blobs/33a62e873cbd42679059935be0b68081e5de1a11"
+INFO 2026-09-21 18:46:59.674 tokio.rs:681] Downloaded filename: .gitattributes to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-8B-Instruct-2509/blobs/52373fe24473b1aa44333d318f578ae6bf04b49b"
+INFO 2026-09-21 18:47:00.002 tokio.rs:681] Downloaded filename: LICENSE.txt to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-8B-Instruct-2509/blobs/822200dbf95a1677730dcf9bad5c7bd06b080f3c"
+INFO 2026-09-21 18:47:00.300 tokio.rs:681] Downloaded filename: README.md to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-8B-Instruct-2509/blobs/c13f2c6e1f9e122cf024f33b867e2c2b3836a528"
+INFO 2026-09-21 18:47:00.591 tokio.rs:681] Downloaded filename: USAGE_POLICY.md to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-8B-Instruct-2509/blobs/9b7baf46e2895729c76ac9e0a238dc23c18bab94"
+INFO 2026-09-21 18:47:00.870 tokio.rs:681] Downloaded filename: chat_template.jinja to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-8B-Instruct-2509/blobs/4a069c900918e05aa73e498d58986ad9a3f87437"
+INFO 2026-09-21 18:47:01.171 tokio.rs:681] Downloaded filename: config.json to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-8B-Instruct-2509/blobs/aae33e0605271f3a5bad2b69a80466e343b94e70"
+INFO 2026-09-21 18:47:01.448 tokio.rs:681] Downloaded filename: generation_config.json to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-8B-Instruct-2509/blobs/fd245b1d3398b6e4d50db12b27cc18d4dba45370"
+INFO 2026-09-21 18:47:52.510 tokio.rs:681] Downloaded filename: model-00001-of-00004.safetensors to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-8B-Instruct-2509/blobs/3c0d9506c084975849cefc1410dbb0300eafc0f480a5fcbc3db8f54c10500912"
+INFO 2026-09-21 18:48:45.122 tokio.rs:681] Downloaded filename: model-00002-of-00004.safetensors to blob: "/opt/nim/.cache/huggingface/hub/models--swiss-ai--Apertus-8B-Instruct-2509/blobs/a934231fe465a8f4b0028454218d787f02b7cae3f91d886ca73b85ca368f2b21"
