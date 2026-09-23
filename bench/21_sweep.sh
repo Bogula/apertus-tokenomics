@@ -47,8 +47,8 @@ if [ "${NEED_LEN:-0}" -gt 0 ] && [ "${MAX_MODEL_LEN:-8192}" -lt "$NEED_LEN" ]; t
   exit 0
 fi
 
-LADDER=$(python3 -c "import json;print(' '.join(map(str,json.load(open('$SCEN'))['concurrency_ladder'])))")
-NREQ=$(python3 -c "import json;print(json.load(open('$SCEN'))['request_count_per_concurrency'])")
+LADDER="${LADDER:-$(python3 -c "import json;print(' '.join(map(str,json.load(open('$SCEN'))['concurrency_ladder'])))")}"
+NREQ="${REQ_COUNT:-$(python3 -c "import json;print(json.load(open('$SCEN'))['request_count_per_concurrency'])")}"
 
 ROOT="$ARTIFACTS_DIR/bench/$SYSTEM/$WL"
 mkdir -p "$ROOT"
@@ -66,7 +66,7 @@ for C in $LADDER; do
   OUTDIR="$ROOT/c$C"
   mkdir -p "$OUTDIR"
   aiperf profile \
-    --model apertus \
+    --model "${SERVED_MODEL:-apertus}" \
     --tokenizer "${TOKENIZER:-swiss-ai/Apertus-v1.5-8B}" \
     --url "$URL" \
     --endpoint-type chat \
