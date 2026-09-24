@@ -12,6 +12,7 @@ every result in dollars per million tokens.
 what is here and how to reproduce it.
 **→ [`docs/APERTUS-1.5.md`](docs/APERTUS-1.5.md)** collects every 1.5-specific
 gotcha, sourced. Apertus 1.5 is not a drop-in for 1.0.
+**→ [Glossary](#glossary)** if ISL:OSL, NVFP4, TTFT or SLO are unfamiliar.
 
 ---
 
@@ -191,6 +192,81 @@ gathers all of them — including hosted endpoints — into one CSV.
 
 ---
 
+## Glossary
+
+### Measurement
+
+| Term | Meaning |
+|---|---|
+| **Token** | The unit a model reads and writes — roughly ¾ of a word. All costs here are per million tokens. |
+| **ISL** | *Input sequence length* — prompt length in tokens. |
+| **OSL** | *Output sequence length* — response length in tokens. |
+| **ISL:OSL** | The ratio of the two. **The single most predictive variable in this study** — it orders the NVFP4 penalty, the Spark's batching efficiency and Dynamo's cost premium, through three unrelated mechanisms. |
+| **TTFT** | *Time to first token* — how long the user stares at nothing. Dominated by prefill. |
+| **ITL** | *Inter-token latency* — the gap between streamed tokens, i.e. how fast text appears once it starts. Dominated by decode. |
+| **TPOT** | *Time per output token* — the same idea as ITL, different tools name it differently. |
+| **p95** | The 95th percentile: 19 requests out of 20 are at least this fast. Averages hide the bad tail; percentiles do not. |
+| **SLO** | *Service level objective* — the latency promise, e.g. "p95 TTFT under 500 ms". Every workload here has one, except `batch`. |
+| **Concurrency** | How many requests are in flight at once. |
+| **Ladder** | The sweep walks concurrency 1, 2, 4, 8 … and stops at the first SLO violation. |
+| **Knee** | The last rung that still meets the SLO — the only operating point whose cost-per-token is meaningful. |
+| **Throughput** | Output tokens per second, summed across all users. Determines cost. |
+| **Per-user throughput** | Output tokens per second for one user. Determines whether it *feels* fast. The two are independent: the DGX Spark has good throughput and terrible per-user speed. |
+
+### Serving
+
+| Term | Meaning |
+|---|---|
+| **Prefill** | Phase 1: read the whole prompt, build the KV cache, emit one token. **Compute-bound.** |
+| **Decode** | Phase 2: generate the rest, one token at a time, re-reading all weights each step. **Memory-bandwidth-bound.** |
+| **KV cache** | The stored attention keys/values for every token so far, so they aren't recomputed each step. Grows with context length; usually what limits concurrency. |
+| **Aggregated** | One worker does prefill and decode for a request. Standard vLLM. A long prefill stalls everyone else's token stream. |
+| **Disaggregated** | Separate prefill and decode workers; the KV cache is shipped between them. Dynamo's `1P+1D` means one prefill worker, one decode worker. |
+| **KV-aware routing** | Sending a request to whichever worker already holds a matching prompt prefix, so prefill can be skipped. Pays off with shared system prompts or repeated RAG context. |
+| **TP** | *Tensor parallelism* — splitting one model across N GPUs. `TP=2` halves the weights per GPU and roughly doubles the bandwidth serving a single stream. |
+| **max-model-len** | The context window the server reserves for. Bigger means less KV budget for concurrency — 262k context is not free. |
+| **max-num-seqs** | Hard cap on concurrent sequences. Caps batching even when KV memory is available. |
+
+### Numerics and hardware
+
+| Term | Meaning |
+|---|---|
+| **Quantization** | Storing weights in fewer bits. Fewer bytes per weight means less to read, which speeds up bandwidth-bound decode — *if the hardware has native kernels for that format.* |
+| **bf16** | 16-bit brain float, 2 bytes/weight. The unquantized baseline. |
+| **FP8** | 8-bit float, 1 byte/weight. **Native on both H100 (sm_90) and GB10 (sm_121)** — which is why it wins on both. |
+| **NVFP4** | NVIDIA's 4-bit float. Native only on datacentre Blackwell. On H100 it is *emulated*; on GB10 vLLM falls back to a software kernel. Hence −36% on H100. |
+| **e4m3** | The FP8 variant used for KV cache here — 4 exponent bits, 3 mantissa. Saturates at 448, so uncalibrated scaling factors can clip. |
+| **W8A8** | 8-bit weights *and* 8-bit activations, as opposed to weight-only quantization. |
+| **Kernel** | The hand-written GPU routine that executes one operation. Whether a fast one exists for your format and architecture decides everything in §5. |
+| **CUTLASS** | NVIDIA's optimized GEMM kernel library. Seeing `CutlassFP8ScaledMM…` in a log means the fast native path. |
+| **Marlin** | A software fallback kernel. Seeing `MarlinNvFp4…` means no native support — the format is being emulated. |
+| **sm_90 / Hopper** | The H100's compute capability. Native FP8, **no FP4 units at all**. |
+| **sm_121 / GB10** | The DGX Spark's consumer Blackwell. Native FP8; FP4 kernels not built (vLLM #50925). |
+| **xIELU** | Apertus's activation function. No CUDA kernel ships in the fork, so it runs in Python — a per-layer, per-token tax. See §10. |
+
+### Tooling
+
+| Term | Meaning |
+|---|---|
+| **NIM** | *NVIDIA Inference Microservice* — NVIDIA's packaged, supported serving containers. Cannot load Apertus 1.5 (§1). |
+| **Dynamo** | NVIDIA's disaggregated serving framework (§9). |
+| **TensorRT-LLM** | NVIDIA's fastest backend. Requires a hand-written model definition; Apertus is absent from its supported models. |
+| **vLLM** | The open-source serving engine everything here actually runs on — specifically Swiss AI's fork. |
+| **AIPerf** | NVIDIA's load-generation and measurement client; produces every number in this repo. |
+| **NGC** | NVIDIA GPU Cloud — the registry NIM images and profiles come from. |
+| **AUP** | *Acceptable Use Policy* — the gate you must accept on Hugging Face before the Apertus weights download. |
+
+### Cost model
+
+| Term | Meaning |
+|---|---|
+| **$/1M out** | Dollars per million **output** tokens: (GPU-hourly ÷ throughput at the knee) × GPU count. |
+| **$/1M blended** | Weighted by the workload's ISL:OSL, so it prices *all* tokens moved, not just generated ones. |
+| **Utilization** | The fraction of paid wall-clock actually serving. We report 100% and 45%. A per-token API has **zero** utilization exposure — that is the whole build-vs-buy argument (§12). |
+| **Break-even volume** | Monthly token volume above which self-hosting beats buying. Requires verified API prices — currently our largest gap. |
+
+---
+
 ## Gotchas that cost us hours
 
 - It is **`NIM_PORT`**, not `PORT`. Setting `PORT` does nothing.
@@ -250,3 +326,4 @@ Run `git status --short` and confirm it is absent before every commit.
   [PR #52708](https://github.com/vllm-project/vllm/pull/52708)
 - [NVIDIA AIPerf command-line options](https://docs.nvidia.com/aiperf/reference/command-line-options)
 - [TensorRT-LLM AutoDeploy](https://nvidia.github.io/TensorRT-LLM/torch/auto_deploy/auto-deploy.html)
+
