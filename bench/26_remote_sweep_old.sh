@@ -23,10 +23,6 @@ cd "$(dirname "$0")/.."
 # shellcheck source=/dev/null
 source .env
 
-# .env exportiert TOKENIZER (den extrahierten Text-Tower). Der read unten
-# ueberschreibt die Variable mit dem Wert aus endpoints.json - vorher sichern.
-LOCAL_TOKENIZER="${TOKENIZER:-}"
-
 CFG="bench/endpoints.json"
 SCEN="bench/scenarios.json"
 REQ_COUNT="${REQ_COUNT:-50}"     # far lower than local runs - every request costs quota
@@ -56,22 +52,6 @@ PY
 )
 EOF
 
-if [ "$TOKENIZER" = "LOCAL" ]; then
-  [ -n "$LOCAL_TOKENIZER" ] || { echo "ERROR: tokenizer=LOCAL, aber \$TOKENIZER fehlt in .env." >&2; exit 1; }
-  TOKENIZER="$LOCAL_TOKENIZER"
-fi
-
-# Zusaetzliche HTTP-Header. Public AI weist Anfragen ohne User-Agent als
-# Bot-Verkehr ab, und ein 403 sieht im Log aus wie ein langsamer Endpunkt.
-HDR=()
-while IFS= read -r h; do [ -n "$h" ] && HDR+=(-H "$h"); done < <(
-  python3 - "$CFG" "$EP" <<'HDRPY'
-import json,sys
-for k,v in (json.load(open(sys.argv[1]))["endpoints"][sys.argv[2]].get("headers") or {}).items():
-    print(f"{k}: {v}")
-HDRPY
-)
-
 API_KEY="${!KEY_ENV:-}"
 if [ -z "$API_KEY" ]; then
   echo "ERROR: \$$KEY_ENV is empty. Put it in .env (which is gitignored)." >&2
@@ -81,7 +61,7 @@ fi
 # ---- fan out over every workload -------------------------------------------
 if [ "$WL" = "all" ]; then
   for w in $(python3 -c "import json;print(' '.join(x['name'] for x in json.load(open('$SCEN'))['workloads']))"); do
-    bash "$0" "$EP" "$w"
+    "$0" "$EP" "$w"
   done
   exit 0
 fi
@@ -124,22 +104,6 @@ if q:
 PY
 [ "$DRY_RUN" = "1" ] && { echo "   (dry run, nothing sent)"; exit 0; }
 
-# ---- Preflight: ein Request, bevor Quota oder Geld fliesst -----------------
-# Faengt die drei Fehler ab, die sonst erst nach Minuten als "langsam" auffallen:
-# falscher Schluessel, falsche Modell-ID, fehlender Pflicht-Header.
-echo "-- preflight"
-PRE=$(curl -sS -w '\n%{http_code}' --max-time 60 "$BASE_URL/chat/completions" \
-  -H "Authorization: Bearer $API_KEY" -H "Content-Type: application/json" "${HDR[@]}" \
-  -d "{\"model\":\"$MODEL\",\"max_tokens\":16,\"temperature\":0,\"messages\":[{\"role\":\"user\",\"content\":\"Sag Hallo.\"}]}" || true)
-CODE=$(printf '%s' "$PRE" | tail -1)
-if [ "$CODE" != "200" ]; then
-  echo "   HTTP $CODE - abgebrochen, nichts gesweept:"
-  printf '%s\n' "$PRE" | head -8
-  echo "   401/403 -> Schluessel oder User-Agent.  404 -> Modell-ID.  429 -> Ratenlimit."
-  exit 1
-fi
-echo "   HTTP 200, Modell antwortet"
-
 mkdir -p "$ROOT"
 
 OUT_ARGS=(--output-tokens-mean "$OSL" --output-tokens-stddev 0
@@ -157,7 +121,6 @@ for C in $LADDER_SP; do
     --endpoint-type chat \
     --streaming \
     --api-key "$API_KEY" \
-    "${HDR[@]}" ${AIPERF_EXTRA:-} \
     --synthetic-input-tokens-mean "$ISL" \
     --synthetic-input-tokens-stddev 0 \
     "${OUT_ARGS[@]}" \
@@ -188,4 +151,3 @@ cat <<EOF
    SLICE, not the provider's capacity. Cost for this row comes from
    bench/endpoints.json (the rate card), not from the throughput measured here.
 EOF
-

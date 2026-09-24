@@ -7,9 +7,30 @@
     "input/output_usd_per_mtok come from the provider's rate card. For a hosted endpoint",
     "these ARE the cost - throughput does not enter the calculation at all.",
     "ladder: concurrency rungs. Keep them low; you are measuring their rate limiter,",
-    "not their hardware, and every rung spends your token quota."
+    "not their hardware, and every rung spends your token quota.",
+    "tokenizer 'LOCAL' means: use $TOKENIZER from .env (the extracted text tower), so no",
+    "gated HF download happens mid-sweep. headers are sent verbatim with every request."
   ],
   "endpoints": {
+    "publicai-apertus-8b": {
+      "base_url": "https://api.publicai.co/v1",
+      "model": "swiss-ai/apertus-v1.5-8b",
+      "tokenizer": "LOCAL",
+      "api_key_env": "PUBLICAI_API_KEY",
+      "headers": {
+        "User-Agent": "apertus-tokenomics/1.0"
+      },
+      "rate_limit_rps": 1.5,
+      "ladder": [
+        1,
+        2
+      ],
+      "input_usd_per_mtok": 0.1,
+      "output_usd_per_mtok": 0.2,
+      "verified": true,
+      "quota": null,
+      "notes": "THE 8B comparator: identical weights to the self-hosted text tower, and a PUBLISHED rate card, so this is a price comparison and not an efficiency proxy. Free tier caps at 100 req/min = 1.67 rps; the cap is set to 1.5 for margin. A User-Agent header is mandatory - without it requests are refused as bot traffic. Advertised context 262K, which is the one thing self-hosting cannot match on price."
+    },
     "swisscom-apertus-70b": {
       "base_url": "https://api.swisscom.com/products/swiss-ai-weeks/apertus-1.5-70b/v1",
       "model": "swiss-ai/Apertus-v1.5-70B",
@@ -26,7 +47,7 @@
         "input_mtok": 10,
         "output_mtok": 2.5
       },
-      "notes": "THE comparator: identical weights to the self-hosted 70B, zero model confound. Bearer expires after 60 min. Free hackathon tier, so no per-token price exists - find the commercial rate or state plainly that you are comparing against a free tier."
+      "notes": "THE 70B comparator: identical weights to the self-hosted 70B, zero model confound. Bearer expires after 60 min. Free hackathon tier, so no per-token price exists - find the commercial rate or state plainly that you are comparing against a free tier."
     },
     "vendor-b": {
       "base_url": "https://REPLACE.example.com/v1",

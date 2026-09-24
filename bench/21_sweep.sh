@@ -23,7 +23,7 @@ SCEN="bench/scenarios.json"
 
 if [ "$WL" = "all" ]; then
   for w in $(python3 -c "import json;print(' '.join(x['name'] for x in json.load(open('$SCEN'))['workloads']))"); do
-    "$0" "$w"
+    bash "$0" "$w"
   done
   exit 0
 fi
